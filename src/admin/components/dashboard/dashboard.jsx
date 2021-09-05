@@ -1,10 +1,10 @@
 import React from 'react'; 
 
 
-export default function Orders() {
+export default function Dashboard() {
     return (
         <>
-            <h1>Orders</h1>
+            <h1>Dashboard</h1>
         </>
     )
 }
