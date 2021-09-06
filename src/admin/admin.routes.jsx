@@ -4,6 +4,8 @@ import Dashboard from './components/dashboard/dashboard';
 import Categories from './components/categories/categories';
 import Products from './components/products/products';
 import Orders from './components/orders/orders';
+import Login from '../shared/components/login/login';
+import Signup from '../shared/components/signup/signup'
 
 export default function AdminRoutes() {
     return (
@@ -14,6 +16,12 @@ export default function AdminRoutes() {
                 </Route>
                 <Route exact path="/admin/dashboard" >
                     <Dashboard />
+                </Route>
+                <Route exact path="/admin/login" >
+                    <Login />
+                </Route>
+                <Route exact path="/admin/registration" >
+                    <Signup />
                 </Route>
                 <Route exact path="/admin/categories" >
                     <Categories />

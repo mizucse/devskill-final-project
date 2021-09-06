@@ -26,17 +26,37 @@ export default  function AdminNavBar() {
     return (
       <Layout>
         <Sider trigger={null} collapsible collapsed={state.collapsed}>
-          <div className="logo" />
+          <div className="logo" style={{color: '#fff', fontSize: '18px',lineHeight: '60px',textAlign: 'center',fontWeight: 'bold'}} >MITECH Admin</div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1" icon={<UserOutlined />}>
-              <Link to='/admin/dashboard'>Dashboard</Link>
+              <Link to='/admin/login'>Login</Link>
             </Menu.Item>
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+              <Link to='/admin/registration'>Registration</Link>
+            </Menu.Item>  
+            <Menu.Item key="3" icon={<UserOutlined />}>
+              <Link to='/admin/dashboard'>Dashboard</Link>
+            </Menu.Item>
+            <Menu.Item key="4" icon={<UploadOutlined />}>
+              <Link to='/admin/orders'>Order List</Link>
+            </Menu.Item>
+            <Menu.Item key="5" icon={<VideoCameraOutlined />}>
               <Link to='/admin/products'>Product List</Link>
             </Menu.Item> 
-            <Menu.Item key="3" icon={<UploadOutlined />}>
-              <Link to='/admin/orders'>Orders
-            </Link>
+            <Menu.Item key="6" icon={<VideoCameraOutlined />}>
+              <Link to='/admin/add-products'>Add Product</Link>
+            </Menu.Item> 
+            <Menu.Item key="7" icon={<VideoCameraOutlined />}>
+              <Link to='/admin/category'>Category List</Link>
+            </Menu.Item> 
+            <Menu.Item key="8" icon={<VideoCameraOutlined />}>
+              <Link to='/admin/add-category'>Add Category</Link>
+            </Menu.Item> 
+            <Menu.Item key="9" icon={<VideoCameraOutlined />}>
+              <Link to='/admin/users'>User List</Link>
+            </Menu.Item> 
+            <Menu.Item key="10" icon={<UploadOutlined />}>
+              <Link to='/admin/logout'>Logout</Link>
             </Menu.Item>
           </Menu>
         </Sider>
@@ -55,7 +75,7 @@ export default  function AdminNavBar() {
               minHeight: '100vh',
             }}
           >
-            Content
+            conent
           </Content>
         </Layout>
       </Layout>
