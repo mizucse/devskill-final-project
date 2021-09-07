@@ -1,6 +1,6 @@
-import React from 'react'; 
+import React from 'react';  
 
-import { Table, Tag, Space } from 'antd';
+import { Table, Tag, Space, Button } from 'antd';
 
 export default function Orders() {
     const { Column, ColumnGroup } = Table;
@@ -59,8 +59,8 @@ export default function Orders() {
             key="action"
             render={(text, record) => (
                 <Space size="middle">
-                <a>Accept </a>
-                <a>Delete</a>
+                <a><Button type="primary">Accept</Button> </a>
+                <a><Button type="danger">Delete</Button></a>
                 </Space>
             )}
             />

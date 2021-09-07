@@ -12,7 +12,7 @@ import {
 
 const { Header, Sider, Content } = Layout;
  
-export default  function AdminNavBar() {
+export default  function AdminNavBar({children}) {
     const [state,setState] = useState({
         collapsed: false,
     });
@@ -75,7 +75,7 @@ export default  function AdminNavBar() {
               minHeight: '100vh',
             }}
           >
-            conent
+            {children}
           </Content>
         </Layout>
       </Layout>

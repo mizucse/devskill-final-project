@@ -53,16 +53,16 @@ export default function Login() {
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
-        <a className="login-form-forgot" href="">
+        {/* <a className="login-form-forgot" href="">
           Forgot password
-        </a>
+        </a> */}
       </Form.Item>
 
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>
-        Or <Link to="/admin/registration">register now!</Link>
+        Or <Link to="/admin/registration">Register now!</Link>
       </Form.Item>
     </Form>  
       </Col>

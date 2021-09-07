@@ -7,8 +7,9 @@ import AdminNavBar from './components/navbar/navbar';
 export default function Admin() {
     return (
         <>
-            <AdminNavBar />
-            <AdminRoutes /> 
+            <AdminNavBar >
+                <AdminRoutes /> 
+            </AdminNavBar>
         </>
     )
 }
