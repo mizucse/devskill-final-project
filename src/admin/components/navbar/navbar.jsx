@@ -28,12 +28,12 @@ export default  function AdminNavBar({children}) {
         <Sider trigger={null} collapsible collapsed={state.collapsed}>
           <div className="logo" style={{color: '#fff', fontSize: '18px',lineHeight: '60px',textAlign: 'center',fontWeight: 'bold'}} >MITECH Admin</div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<UserOutlined />}>
+            {/* <Menu.Item key="1" icon={<UserOutlined />}>
               <Link to='/admin/login'>Login</Link>
             </Menu.Item>
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
               <Link to='/admin/registration'>Registration</Link>
-            </Menu.Item>  
+            </Menu.Item>   */}
             <Menu.Item key="3" icon={<UserOutlined />}>
               <Link to='/admin/dashboard'>Dashboard</Link>
             </Menu.Item>

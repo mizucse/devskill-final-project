@@ -17,12 +17,6 @@ export default function AdminRoutes() {
                 <Route exact path="/admin/dashboard" >
                     <Dashboard />
                 </Route>
-                <Route exact path="/admin/login" >
-                    <Login />
-                </Route>
-                <Route exact path="/admin/registration" >
-                    <Signup />
-                </Route>
                 <Route exact path="/admin/categories" >
                     <Categories />
                 </Route>

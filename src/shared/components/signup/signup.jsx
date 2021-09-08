@@ -96,7 +96,7 @@ export default function Signup() {
         <Button type="primary" htmlType="submit" className="login-form-button">
           Sign Up
         </Button>
-        Already Registered! <Link to="/admin/login"> Login Now</Link>
+        Already Registered! <Link to="/login"> Login Now</Link>
       </Form.Item>
     </Form>  
       </Col>
