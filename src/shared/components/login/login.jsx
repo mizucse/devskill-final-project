@@ -3,14 +3,18 @@ import { Form, Input, Button, Checkbox, Row, Col , Typography } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-
+import { useDispatch, useSelector } from 'react-redux'; 
+import { signInAction } from '../../../store/action/signInAction';
 
 
 export default function Login() {
+
   const [loginData, setloginData] = useState({
     email: '',
     password: ''
   }); 
+  
+  const dispatch = useDispatch();
 
   const loginInfo = (e,dataType) => {
       setloginData({
@@ -18,20 +22,19 @@ export default function Login() {
       });  
   }
 
+
   const submitLogin = () => {
-    axios.post('http://localhost:3000/signin',{"email": "test@gmail.com",
-		"password": "12345678"
-        })
-        .then((response)=>{ 
-           console.log(response.data, "===response in then") 
-        }).catch((error)=>{
-          console.log(error, "===response in catch") 
-        });
+    dispatch(signInAction(loginData)); 
   }
     
+ const  authUser = useSelector((store) => store.authStore);
 
+ console.log(authUser);
+ 
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    // console.log('Received values of form.email: ', values.email);
+    // console.log('Received values of form.pass: ', values.password);
+ 
   };
 
   const { Title } = Typography;
@@ -63,8 +66,7 @@ export default function Login() {
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
       </Form.Item>
       <Form.Item
-        name="password"
-        onChange={(e) => loginInfo(e,'password')}
+        name="password" onChange={(e) => loginInfo(e,'password')}
         rules={[
           {
             required: true,
@@ -89,6 +91,7 @@ export default function Login() {
       </Form.Item>
 
       <Form.Item>
+      {/*  */}
         <Button onClick={submitLogin} type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>

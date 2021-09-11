@@ -6,6 +6,7 @@ import Products from './components/products/products';
 import Orders from './components/orders/orders';
 import Login from '../shared/components/login/login';
 import Signup from '../shared/components/signup/signup'
+import AddCategory from './components/categories/categories.form';
 
 export default function AdminRoutes() {
     return (
@@ -19,6 +20,9 @@ export default function AdminRoutes() {
                 </Route>
                 <Route exact path="/admin/categories" >
                     <Categories />
+                </Route>
+                <Route exact path="/admin/add-category" >
+                    <AddCategory />
                 </Route>
                 <Route path="/admin/products" >
                     <Products />
