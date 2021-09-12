@@ -8,10 +8,8 @@ export default function Admin() {
     return (
         <>
             <AdminNavBar >
-                <AdminRoutes /> 
+                <AdminRoutes />
             </AdminNavBar>
-            
-            
         </>
     )
 }

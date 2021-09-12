@@ -1,4 +1,5 @@
 import { ActionType } from "../actionType";
+import { BASE_URL } from "../../utils/constants";
 import axios from "axios"; 
 
 export const setUserSignUpData = (signUpData) => {
@@ -11,7 +12,7 @@ export const setUserSignUpData = (signUpData) => {
 export const signUpAction = (signUpData) => {
     return async (dispatch, action) => {
         try {
-                const response = await axios.post("http://localhost:8080/signup", {
+                const response = await axios.post(`${BASE_URL}/signup`, {
                 email: signUpData.email,
                 username: signUpData.username,
                 firstname: signUpData.firstname,

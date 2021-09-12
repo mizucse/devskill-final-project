@@ -20,6 +20,10 @@ const signInReducer = (state = initialState, action) => {
                 role: action.payload.userInfo.role,
                 token: action.payload.userInfo.token,
             }
+        case ActionType.SIGN_OUT:
+            return {
+                ...initialState, initialState: []
+            }
         default :
             return state;
     }

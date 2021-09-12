@@ -2,6 +2,7 @@ import React from 'react';
 import {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
+import Logout from '../../../shared/components/logout/logout';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -9,6 +10,9 @@ import {
   VideoCameraOutlined,
   UploadOutlined,
 } from '@ant-design/icons';
+import { useDispatch } from 'react-redux';
+import { history } from '../../../utils/helpers/history';
+import { signOutAction } from '../../../store/action/signOutAction';
 
 const { Header, Sider, Content } = Layout;
  
@@ -16,12 +20,20 @@ export default  function AdminNavBar({children}) {
     const [state,setState] = useState({
         collapsed: false,
     });
+    const dispatch = useDispatch();
 
     const toggle = () => {
         setState({
             collapsed: !state.collapsed,
         });
     };
+
+    const logout = () => {
+      console.log("Inside logout function after logout click");
+      // dispatch(Logout());
+      dispatch(signOutAction());
+      // history.push('/');
+    }
  
     return (
       <Layout>
@@ -56,7 +68,7 @@ export default  function AdminNavBar({children}) {
               <Link to='/admin/users'>User List</Link>
             </Menu.Item> 
             <Menu.Item key="10" icon={<UploadOutlined />}>
-              <Link to='/admin/logout'>Logout</Link>
+              <div onClick={logout}>Logout</div>
             </Menu.Item>
           </Menu>
         </Sider>

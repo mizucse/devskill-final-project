@@ -23,13 +23,15 @@ export default function Login() {
   }
 
 
+  const  authUserInfo = useSelector((store) => store.authUser);
+
+  console.log(authUserInfo,"authUser info from redux store ");
+
   const submitLogin = () => {
     dispatch(signInAction(loginData)); 
   }
     
- const  authUser = useSelector((store) => store.authStore);
 
- console.log(authUser);
  
   const onFinish = (values) => {
     // console.log('Received values of form.email: ', values.email);
