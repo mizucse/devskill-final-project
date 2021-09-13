@@ -8,6 +8,7 @@ export const SIGN_UP = "/registration";
 export const ADMIN = "/admin";
 export const DASHBOARD = "/admin/dashboard";
 
+export const ALL_CATEGORY = "/admin/categories";
 export const ADD_CATEGORY = "/admin/add-category";
 export const UPDATE_CATEGORY = "/admin/update-category";
 export const DELETE_CATEGORY = "/admin/delete-category";

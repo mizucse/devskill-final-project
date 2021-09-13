@@ -12,6 +12,10 @@ export const signOutAction = () => {
 export const SignOutData = () => {
     return {
         type: ActionType.SIGN_OUT,
-        payload: {user: {email: '', role: '', token: ''}}
+        payload: {authStore: {
+            email: null,
+            role: null,
+            token: null
+        }}
     }
 }
