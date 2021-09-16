@@ -1,13 +1,13 @@
 import { ActionType } from "../actionType";
 
-const initialState = {
+const user  = {
     email: null,
     role: null,
     token: null,
     //user: []
   };
 
-const signInReducer = (state = initialState, action) => {
+const signInReducer = (state = user, action) => {
 // action
 //   |-- type
 //   |-- payload
@@ -15,14 +15,14 @@ const signInReducer = (state = initialState, action) => {
     switch(action.type) {
         case ActionType.SIGN_IN:
             return {
-                ...initialState,
+                ...user,
                 email: action.payload.userInfo.user,
                 role: action.payload.userInfo.role,
                 token: action.payload.userInfo.token,
             }
         case ActionType.SIGN_OUT:
             return {
-                ...initialState, initialState: []
+                ...user, initialState: []
             }
         default :
             return state;

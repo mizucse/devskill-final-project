@@ -6,6 +6,7 @@ export const signOutAction = () => {
     return async (dispatch, action) => { 
         dispatch(SignOutData());
         history.push('/login');
+        window.location.reload(100);
     }
 }
 

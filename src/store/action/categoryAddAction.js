@@ -3,34 +3,53 @@ import { BASE_URL,ALL_CATEGORY } from "../../utils/constants";
 import axios from "axios"; 
 import { useHistory } from 'react-router-dom';
  
+export const setCategoriesSuccess = (Categories) => {
+    return {
+      type: ActionType.CATEGORY_LIST_SUCCESS,
+      payload: Categories,
+    };
+};
+ 
 
-export const CategoryAddAction = (categoryAddData) => {
-    
-    const history = useHistory();
+export const CategoryAddAction = (categoryAddData) => { 
+    return async (dispatch, getState) => {
+            const {authStore} = getState();
+            const token = authStore.token;
+            // console.log(token);
 
-    axios.post(`${BASE_URL}/category`,{
-        name: categoryAddData.name,
-        description: categoryAddData.description   
-    })
-    .then((response)=>{
-
-        console.log(response.data, "=== response in category add ===")
-        history.push(`${ALL_CATEGORY}`);
-    }).catch((error)=>{
-        console.log(error, "===response error in category add ===")
-
-    });
-
-
-    // return async (dispatch, action) => {
-    //     try {
-    //             const response = await axios.post(`${BASE_URL}/category`, {
-    //             name: categoryAddData.name,
-    //             username: categoryAddData.description
-    //         }); 
-    //     }catch(error){
-    //         console.log(error,"signup errooor");
-    //     }
-
-    // }
+        try {
+                const response = await axios.post(`${BASE_URL}/category`, {
+                name: categoryAddData.name,
+                description: categoryAddData.description 
+            },
+            {
+                headers: { authorization: `bearer ${token}` },
+            }); 
+        }catch(error){
+            console.log(error,"category add errooor");
+        }
+    }
 }
+
+   
+
+export const CategoryListAction  = ( ) => {
+    
+    return async (dispatch, getState) => {
+        const {authStore} = getState();
+        const token = authStore.token;
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/category",{},
+          {
+            headers: { authorization: `bearer ${token}` },
+          }
+        );
+      
+        dispatch(setCategoriesSuccess(response.data));
+        // console.log(response.data);
+       } catch (error) {
+          console.log(error.response);
+      }
+    };
+  };

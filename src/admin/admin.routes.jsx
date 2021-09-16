@@ -5,6 +5,8 @@ import Categories from './components/categories/categories';
 import Products from './components/products/products';
 import Orders from './components/orders/orders'; 
 import AddCategory from './components/categories/categories.form'; 
+import Users from './components/users/users'; 
+import AddProduct from './components/products/products.form';
 
 export default function AdminRoutes() {
     return (
@@ -16,14 +18,20 @@ export default function AdminRoutes() {
                 <Route exact path="/admin/add-category" >
                     <AddCategory />
                 </Route>
-                <Route exact path="/admin/categories" >
+                <Route exact path="/admin/category" >
                     <Categories />
                 </Route>
                 <Route path="/admin/products" >
                     <Products />
                 </Route> 
+                <Route path="/admin/add-product" >
+                    <AddProduct />
+                </Route> 
                 <Route path="/admin/orders" >
                     <Orders />
+                </Route> 
+                <Route path="/admin/users" >
+                    <Users />
                 </Route> 
                 <Route exact path="*" >
                     Not Found

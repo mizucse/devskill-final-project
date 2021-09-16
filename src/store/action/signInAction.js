@@ -18,5 +18,6 @@ export const signInAction = (user) => {
         });
         dispatch(setUserSignInData(response.data));
         history.push(`${DASHBOARD}`);
+        window.location.reload();
      }
 }

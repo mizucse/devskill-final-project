@@ -56,7 +56,7 @@ export default  function AdminNavBar({children}) {
               <Link to='/admin/products'>Product List</Link>
             </Menu.Item> 
             <Menu.Item key="6" icon={<VideoCameraOutlined />}>
-              <Link to='/admin/add-products'>Add Product</Link>
+              <Link to='/admin/add-product'>Add Product</Link>
             </Menu.Item> 
             <Menu.Item key="7" icon={<VideoCameraOutlined />}>
               <Link to='/admin/category'>Category List</Link>

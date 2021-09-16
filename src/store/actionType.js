@@ -1,5 +1,7 @@
 export const ActionType = {
     SIGN_UP: "SIGN_UP",
     SIGN_IN: "SIGN_IN",
-    SIGN_OUT: "SIGN_OUT"
+    SIGN_OUT: "SIGN_OUT",
+    CATEGORY_LIST_SUCCESS: "CATEGORY_LIST_SUCCESS",
+    ADD_PRODUCT: "ADD_PRODUCT"
 }

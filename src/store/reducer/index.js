@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import {persistReducer} from 'redux-persist';
 import signInReducer from "./signInReducer";
+import CategoryReducer from "./categoryReducer";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
@@ -9,7 +10,9 @@ const persistConfig = {
 }
 
 export const userPersistedStore = persistReducer(persistConfig, signInReducer);
+export const categoryListStore = persistReducer(persistConfig, CategoryReducer);
 
 export const mainReducer = combineReducers({
-    authStore: userPersistedStore
+    authStore: userPersistedStore,
+    categoryStore: categoryListStore
 });
