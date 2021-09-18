@@ -70,6 +70,7 @@ export const GetProductDetailsAction = (id) => {
         try {
             const response = await axios.get(`${BASE_URL}/products/${id}`);
             dispatch(setProductDetailsData(response.data));
+            // console.log(response.data,"----- details");
         }catch(error){
             console.log(error,"Product Details view error");
         }

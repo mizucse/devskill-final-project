@@ -28,7 +28,7 @@ export default ProductReducer;
 const productDetails = {
     // name: null,
     // description: null,
-    productDetails : {}
+    productDetail : {}
   };
 
   export const ProductDetailsReducer = (state = productDetails, action) => {
@@ -37,10 +37,10 @@ const productDetails = {
     switch(action.type) {
         case ActionType.PRODUCT_DETAILS_SUCCESS:
             return {
-                ...productDetails,
+                ...state,
                 // name: action.payload.categoryInfo.name,
                 // description: action.payload.categoryInfo.description, 
-                productDetails : action.payload,
+                productDetail : action.payload,
             }
             default :
                 return state;
