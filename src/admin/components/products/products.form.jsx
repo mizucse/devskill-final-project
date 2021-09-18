@@ -6,8 +6,8 @@ import { Row, Col } from 'antd';
 import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios'; 
 import { useDispatch, useSelector } from 'react-redux'; 
-import {CategoryListAction} from '../../../store/action/categoryAddAction'
-import { AddProductAction } from '../../../store/action/addProductAction';
+import {CategoryListAction} from '../../../store/action/categoryAction'
+import { AddProductAction } from '../../../store/action/productAction';
 import FileBase64 from "react-file-base64";
 
  
@@ -38,10 +38,10 @@ export default function AddProduct() {
   const [image, setImage] = useState();
   const [addProductData, setAddProductData] = useState({
     title: '',
-    price: '',
+    price: 0,
     description: '',
     image: '',
-    stock: '',
+    stock: 0,
     category: {
         _id: '',
     }, 
@@ -65,7 +65,6 @@ export default function AddProduct() {
 
   const addProductSubmit = () => { 
       dispatch(AddProductAction(addProductData)); 
-      
       console.log(addProductData,'=====products info taken======')
   }
 
@@ -78,7 +77,6 @@ export default function AddProduct() {
 
   useEffect(() => {
     dispatch(CategoryListAction());
-   
   }, []);
 
   const handleImage = (e) => {
@@ -89,9 +87,9 @@ export default function AddProduct() {
 
 
   return (
-    <Row align="middle" style={{height: '100vh'}}>
+    <Row align="" style={{height: '100vh'}}>
       <Col span={12} offset={6}>
-        
+        <h1 style={{textAlign: "center"}}>Product Add Form</h1>
       <Form
       name="normal_login"
       className="login-form" style={{maxWidth: '550px',margin: '0 auto'}}
@@ -112,7 +110,7 @@ export default function AddProduct() {
         <Input onKeyUp={(e) => productInfo(e, 'title')} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Product Title" />
       </Form.Item>
       <Form.Item
-        name="price"
+        name="price" type="number"
         rules={[
           {
             required: true,
@@ -133,10 +131,10 @@ export default function AddProduct() {
       >
         <Input onKeyUp={(e) => productInfo(e, 'description')} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Product description" />
       </Form.Item>
-      {/* <Space direction="vertical" style={{ width: '100%' }} size="large">
+      <Space direction="vertical" style={{ width: '100%', marginBottom:"15px"}} size="large">
         <FileBase64 onDone={handleImage} multiple={false} />
                 {image ? <pre>Image Uploaded</pre> : null} 
-      </Space> */}
+      </Space>
       <Form.Item
         name="stock"
         rules={[

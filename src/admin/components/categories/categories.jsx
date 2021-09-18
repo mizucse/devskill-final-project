@@ -1,45 +1,51 @@
-import React from 'react';  
-
-import { Table, Tag, Space, Button, h1 } from 'antd';
+import React, { useEffect, useState } from 'react'; 
+import { useHistory } from 'react-router';
+import { BASE_URL } from '../../../utils/constants';
+import { Table, Tag, Space, Button, Image} from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { CategoryListAction } from '../../../store/action/categoryAction';
+ 
 
 export default function Categories() {
-    const { Column, ColumnGroup } = Table;
+    const { Column, ColumnGroup } = Table; 
+ 
+    const history = useHistory();
+    const categoryList = useSelector(store=>store.categoryStore.category)
 
-    const data = [
-      {
-        key: '1',
-        name: 'cat 1',
-        description: 'description 1', 
-      },
-      {
-        key: '2',
-        name: 'cat 2',
-        description: 'description 2', 
-      },
-      {
-        key: '3',
-        name: 'cat 3',
-        description: 'description 3', 
-      },
-    ];
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+      dispatch(CategoryListAction());
+    },[]);
+
+    console.log(categoryList,"========categoryList components======");
+
+    const data = categoryList;
     
+    const updateCategory = (e, id) => {
+        console.log(id, "===== click update category ====");
+    }
+    
+    const deleteCategory = (e, id) => {
+        console.log(id, "===== click delete category ====");
+    }
 
     return (
         <>
-        <h1>All Categories</h1>
+            <h1 style={{fontSize: "32px", textAlign: "center"}}>Category List</h1> 
             <Table dataSource={data}>  
-            <Column title="Name" dataIndex="name" key="name" /> 
-            <Column title="Description" dataIndex="description" key="description" /> 
-            {/* <Column
+            <Column title="Name" dataIndex="name" key="name" />  
+            <Column title="Description" dataIndex="description" key="description" />  
+            <Column
             title="Action"
             key="action"
             render={(text, record) => (
                 <Space size="middle">
-                <a><Button type="primary">Accept</Button> </a>
-                <a><Button type="danger">Delete</Button></a>
+                    <Button value={record._id} onClick={(e)=>updateCategory(e, record._id)} type="primary">Update</Button>
+                    <Button  onClick={(e)=>deleteCategory(e, record._id)} type="danger">Delete</Button>
                 </Space>
             )}
-            /> */}
+            />
         </Table>
         </>
     )

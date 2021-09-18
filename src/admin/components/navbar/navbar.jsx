@@ -2,13 +2,13 @@ import React from 'react';
 import {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
-import Logout from '../../../shared/components/logout/logout';
+import Logout from '../../../shared/components/logout/logout'; 
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   UserOutlined,
   VideoCameraOutlined,
-  UploadOutlined,
+  UploadOutlined,HomeOutlined, AppstoreOutlined, SettingOutlined
 } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { history } from '../../../utils/helpers/history';
@@ -46,8 +46,11 @@ export default  function AdminNavBar({children}) {
             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
               <Link to='/admin/registration'>Registration</Link>
             </Menu.Item>   */}
-            <Menu.Item key="3" icon={<UserOutlined />}>
+            <Menu.Item key="3" icon={<HomeOutlined />}>
               <Link to='/admin/dashboard'>Dashboard</Link>
+            </Menu.Item>
+            <Menu.Item key="11" icon={<AppstoreOutlined />}>
+              <Link to='/admin/public/products'>Public Products</Link>
             </Menu.Item>
             <Menu.Item key="4" icon={<UploadOutlined />}>
               <Link to='/admin/orders'>Order List</Link>

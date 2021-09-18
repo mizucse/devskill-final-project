@@ -27,3 +27,31 @@ export const signUpAction = (signUpData) => {
 
     }
 }
+
+
+
+export const setUserListData = (userListData) => {
+    return {
+        type: ActionType.USER_LIST_SUCCESS,
+        payload: userListData
+    }
+}
+
+
+export const GetAllUserAction = () => { 
+    return async (dispatch, getState) => {
+        const {authStore} = getState();
+        const token = authStore.token;
+        try {
+            const response = await axios.get(`${BASE_URL}/user`,
+            {
+                headers: { authorization: `bearer ${token}` },
+            });
+            dispatch(setUserListData(response.data));
+            console.log(response.data,null, ' ');
+        }catch(error){
+            console.log(error,"Get User List  Error");
+        }
+
+    }
+}

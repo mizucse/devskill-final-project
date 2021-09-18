@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Radio } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'; 
-import { CategoryAddAction } from '../../../store/action/categoryAddAction'; 
+import { CategoryAddAction } from '../../../store/action/categoryAction'; 
  
 
 export default function AddCategory() {

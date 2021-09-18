@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom'; 
 import Dashboard from './components/dashboard/dashboard';
+import PublicProducts from './components/publicProducts/public.product';
+import ProductDetails from './components/publicProducts/public.product.details';
 import Categories from './components/categories/categories';
 import Products from './components/products/products';
 import Orders from './components/orders/orders'; 
@@ -14,6 +16,12 @@ export default function AdminRoutes() {
             <Switch>
                 <Route exact path="/admin/dashboard" >
                     <Dashboard />
+                </Route>
+                <Route exact path="/admin/public/products" >
+                    <PublicProducts />
+                </Route>
+                <Route exact path="/admin/public/product/:id" >
+                    <ProductDetails />
                 </Route>
                 <Route exact path="/admin/add-category" >
                     <AddCategory />

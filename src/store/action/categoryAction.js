@@ -33,8 +33,7 @@ export const CategoryAddAction = (categoryAddData) => {
 
    
 
-export const CategoryListAction  = ( ) => {
-    
+export const CategoryListAction  = () => { 
     return async (dispatch, getState) => {
         const {authStore} = getState();
         const token = authStore.token;
