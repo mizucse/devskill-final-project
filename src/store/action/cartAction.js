@@ -36,7 +36,7 @@ export const getCartAction = () => {
         try {
             const response = await axios.get(`${BASE_URL}/cart`, { headers: { authorization: `bearer ${token}` } });
              
-            dispatch(setCartData(response.data?.product));
+            dispatch(setCartData(response.data?.products));
             console.log(response.data,"====get all cart from database===");
         }catch(error){
             console.log(error,"Cart Product load from getCartAction error");

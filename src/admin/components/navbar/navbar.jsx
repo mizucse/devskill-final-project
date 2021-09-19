@@ -27,8 +27,10 @@ export default  function AdminNavBar({children}) {
       dispatch(getCartAction());
     })
 
-    const cartList = useSelector((store)=>store.cartStore.cart);
+    const cartList = useSelector((store)=>store.cartStore.data);
+    
     console.log(cartList,"navbar cart list====");
+    console.log(cartList.length,"length navbar cart list====");
 
     const toggle = () => {
         setState({
