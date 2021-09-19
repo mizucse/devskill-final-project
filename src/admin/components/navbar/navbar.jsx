@@ -18,19 +18,18 @@ import { getCartAction } from '../../../store/action/cartAction';
 const { Header, Sider, Content } = Layout;
  
 export default  function AdminNavBar({children}) {
-    const [state,setState] = useState({
-        collapsed: false,
-    });
     const dispatch = useDispatch();
+    const [state,setState] = useState({ collapsed: false, });
+    const cartList = useSelector((store)=>store.cartStore.data);
+    const cartLength = cartList?.length;
 
     useEffect(()=>{
       dispatch(getCartAction());
-    })
+    },[]);
+  
 
-    const cartList = useSelector((store)=>store.cartStore.data);
-    
     console.log(cartList,"navbar cart list====");
-    console.log(cartList.length,"length navbar cart list====");
+    console.log(cartList?.length,"length navbar cart list====");
 
     const toggle = () => {
         setState({
@@ -93,7 +92,7 @@ export default  function AdminNavBar({children}) {
               onClick: toggle,
             })}
             <div  >
-            <Badge count={5}>
+            <Badge count={cartLength}>
                 <ShoppingCartOutlined shape="round" size="large" style={{color: "#fff", fontSize: "24px"}}/>
             </Badge>
 
