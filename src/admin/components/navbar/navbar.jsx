@@ -1,18 +1,19 @@
-import React from 'react'; 
+import React, { useEffect } from 'react'; 
 import {useState} from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Badge } from 'antd';
 import Logout from '../../../shared/components/logout/logout'; 
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
+  MenuUnfoldOutlined, UnorderedListOutlined, DatabaseOutlined, PlusCircleOutlined, PicCenterOutlined,
+  MenuFoldOutlined,PlusSquareOutlined,
   UserOutlined,
   VideoCameraOutlined,
-  UploadOutlined,HomeOutlined, AppstoreOutlined, SettingOutlined
+  UploadOutlined,HomeOutlined, AppstoreOutlined, SettingOutlined,ShoppingCartOutlined
 } from '@ant-design/icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../../utils/helpers/history';
 import { signOutAction } from '../../../store/action/signOutAction';
+import { getCartAction } from '../../../store/action/cartAction';
 
 const { Header, Sider, Content } = Layout;
  
@@ -21,6 +22,13 @@ export default  function AdminNavBar({children}) {
         collapsed: false,
     });
     const dispatch = useDispatch();
+
+    useEffect(()=>{
+      dispatch(getCartAction());
+    })
+
+    const cartList = useSelector((store)=>store.cartStore.cart);
+    console.log(cartList,"navbar cart list====");
 
     const toggle = () => {
         setState({
@@ -39,7 +47,7 @@ export default  function AdminNavBar({children}) {
       <Layout>
         <Sider trigger={null} collapsible collapsed={state.collapsed}>
           <div className="logo" style={{color: '#fff', fontSize: '18px',lineHeight: '60px',textAlign: 'center',fontWeight: 'bold'}} >MITECH Admin</div>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+          <Menu theme="dark" style={{color: "#fff"}} mode="inline" defaultSelectedKeys={['1']}>
             {/* <Menu.Item key="1" icon={<UserOutlined />}>
               <Link to='/admin/login'>Login</Link>
             </Menu.Item>
@@ -52,22 +60,22 @@ export default  function AdminNavBar({children}) {
             <Menu.Item key="11" icon={<AppstoreOutlined />}>
               <Link to='/admin/public/products'>Public Products</Link>
             </Menu.Item>
-            <Menu.Item key="4" icon={<UploadOutlined />}>
+            <Menu.Item key="4" icon={<UnorderedListOutlined />}>
               <Link to='/admin/orders'>Order List</Link>
             </Menu.Item>
-            <Menu.Item key="5" icon={<VideoCameraOutlined />}>
+            <Menu.Item key="5" icon={<DatabaseOutlined />}>
               <Link to='/admin/products'>Product List</Link>
             </Menu.Item> 
-            <Menu.Item key="6" icon={<VideoCameraOutlined />}>
+            <Menu.Item key="6" icon={<PlusCircleOutlined />}>
               <Link to='/admin/add-product'>Add Product</Link>
             </Menu.Item> 
-            <Menu.Item key="7" icon={<VideoCameraOutlined />}>
+            <Menu.Item key="7" icon={<PicCenterOutlined />}>
               <Link to='/admin/category'>Category List</Link>
             </Menu.Item> 
-            <Menu.Item key="8" icon={<VideoCameraOutlined />}>
+            <Menu.Item key="8" icon={<PlusSquareOutlined />}>
               <Link to='/admin/add-category'>Add Category</Link>
             </Menu.Item> 
-            <Menu.Item key="9" icon={<VideoCameraOutlined />}>
+            <Menu.Item key="9" icon={<UserOutlined />}>
               <Link to='/admin/users'>User List</Link>
             </Menu.Item> 
             <Menu.Item key="10" icon={<UploadOutlined />}>
@@ -76,11 +84,21 @@ export default  function AdminNavBar({children}) {
           </Menu>
         </Sider>
         <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }}>
+          <Header className="site-layout-background" style={{ padding: "0 30px 0 0",  display: 'flex', justifyContent: "space-between", alignItems: "center", paddingRight: "30px" }} >
             {React.createElement(state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
               className: 'trigger',
+              style: {color: "#fff"},
               onClick: toggle,
             })}
+            <div  >
+            <Badge count={5}>
+                <ShoppingCartOutlined shape="round" size="large" style={{color: "#fff", fontSize: "24px"}}/>
+            </Badge>
+
+              {/* <ShoppingCartOutlined style={{color: "#fff", fontSize: "22px"}}/>
+
+              <div style={{position: "absolute", top: 9, right: 0, border: "1px solid $fff"}}>3</div> */}
+            </div>
           </Header>
           <Content
             className="site-layout-background"

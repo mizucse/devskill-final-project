@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'; 
+import React, { useEffect } from 'react'; 
 import { useHistory } from 'react-router';
-import { BASE_URL } from '../../../utils/constants';
-import { Table, Tag, Space, Button, Image} from 'antd';
+// import { BASE_URL } from '../../../utils/constants';
+import { Table, Space, Button} from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { CategoryListAction } from '../../../store/action/categoryAction';
  

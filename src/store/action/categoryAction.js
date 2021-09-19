@@ -1,7 +1,7 @@
 import { ActionType } from "../actionType";
 import { BASE_URL,ALL_CATEGORY } from "../../utils/constants";
 import axios from "axios"; 
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
  
 export const setCategoriesSuccess = (Categories) => {
     return {

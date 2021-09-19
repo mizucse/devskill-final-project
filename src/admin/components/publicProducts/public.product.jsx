@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Row, Col, Divider, Card  } from "antd";
+import { Row, Col, Divider, Card, Button } from "antd";
 import { BASE_URL } from "../../../utils/constants";
 import { useHistory } from 'react-router'; 
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,11 +18,18 @@ export default function PublicProducts() {
       dispatch(GetAllProductAction());
     },[]);
 
-    const viewProductDetails = (id) => { 
+    const viewProductDetails = (e, id) => { 
+        e.preventDefault();
+
         history.push(`/admin/public/product/${id}`);
     } 
 
     console.log(productList,"========products components======");
+
+
+    const addToCart = (id) => {
+        console.log(id,"========added to cart======");
+    } 
     
   return (
     <>
@@ -31,15 +38,18 @@ export default function PublicProducts() {
         { 
                 productList.map((product) => {
                 return <>
-                    <Col className="gutter-row" span={6} onClick={(e)=>viewProductDetails(product._id)}>
+                    <Col className="gutter-row" span={6} onClick={(e)=>viewProductDetails(e, product._id)} style={{zIndex: 1}}>
                         <div style={style}>
                         <Card hoverable
-                                style={{ width: 240 }}
+                                style={{ width: "100%" }}
                                 cover={<img alt="example" src={BASE_URL+product.image} />}
                             >
                                 <Meta title={product.title} />
                                 <h4 style={{paddingTop: "5px"}}>Price: {product.price} </h4>
-                                <Meta description={product.description} /> 
+                                {/* <Meta description={product.description} />  */}
+                                <Button onClick={((e)=>addToCart(e, product?.id))} type="primary"  size="small" style={{zIndex: 22}}>
+                                    Add to cart
+                                </Button>
                             </Card>
                         </div>
                     </Col>

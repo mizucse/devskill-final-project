@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Divider, Card  } from "antd";
+import { Row, Col, Divider, Card, InputNumber, Button  } from "antd";
+import { CartOutlined } from '@ant-design/icons';
+
 import { BASE_URL } from "../../../utils/constants";
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetProductDetailsAction } from '../../../store/action/productAction';
+import { cartAction } from "../../../store/action/cartAction";
 
 const style = { padding: '8px 0' };
 const { Meta } = Card;
@@ -11,8 +14,8 @@ const { Meta } = Card;
 export default function ProductDetails() {
     const {id} = useParams();
     const history = useHistory(); 
-    const currentProduct = useSelector(store=>store.productDetailsStore.productDetails)
-    
+    const currentProduct = useSelector(store=>store.productDetailsStore.productDetail)
+    const [cartQty, setCartQty] = useState(1);
 
     const dispatch = useDispatch();
 
@@ -20,30 +23,33 @@ export default function ProductDetails() {
       dispatch(GetProductDetailsAction(id));
     },[]);
 
-    const addToCart = (id) => { 
-        console.log(id);
-    console.log(id,"========added to cart======");
-    } 
+    function onChange(value) { 
+        setCartQty(value);
+    }
+
+    const addToCart = (e) => {
+        e.preventDefault(); 
+        dispatch(cartAction(id,cartQty))
+    }
 
     
   return (
     <>
     <Divider orientation="left">Product Details</Divider>
-    <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        <Col className="gutter-row" span={12} >
-            <div style={style}>
-            <Card hoverable style={{ width: 240 }}
-                    cover={<img alt="example" src={BASE_URL+currentProduct.image} />}
-                >
-                    <Meta title={currentProduct.title} />
-                    <h4 style={{paddingTop: "5px"}}>Price: {currentProduct.price} </h4>
-                    <h4 style={{paddingTop: "5px"}}> Category: {currentProduct.category} </h4>
-                    <Meta description={currentProduct.description} /> 
-                    <button onClick={addToCart(currentProduct.id)}>Add to cart</button>
-                </Card>
-            </div>
-        </Col>
-    </Row>
+    <Row>
+      <Col span={8} style={{padding: "0 15px"}}><img style={{width: "100%"}} alt="example" src={BASE_URL+currentProduct?.image} /></Col>
+      <Col span={16}>
+        <Card title={currentProduct?.title} style={{ width: "100%" }}>
+            <p>Price: {currentProduct?.price}</p>
+            <p>Category: {currentProduct.category?.name}</p>
+            <p>{currentProduct?.description}</p>
+            <InputNumber min={1}  defaultValue={1} onChange={onChange} /> &nbsp;
+            <Button onClick={(e) => addToCart(e)} type="primary"  size="medium" >
+                Add to cart
+            </Button>
+        </Card>
+      </Col>
+    </Row> 
     </>
   );
 }

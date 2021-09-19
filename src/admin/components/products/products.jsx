@@ -7,7 +7,7 @@ import { Table, Tag, Space, Button, Image} from 'antd';
  
 
 export default function Products() {
-    const { Column, ColumnGroup } = Table; 
+    const { Column } = Table; 
  
     const history = useHistory();
     const productList = useSelector(store=>store.productStore.product)
