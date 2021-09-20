@@ -10,12 +10,13 @@ import AddCategory from './components/categories/categories.form';
 import Users from './components/users/users'; 
 import AddProduct from './components/products/products.form';
 import CartList from './components/cart/cartList';
+import UpdateCategory from './components/categories/update_categories.form';
 
 export default function AdminRoutes() {
     return (
         <>
             <Switch>
-                <Route exact path="/admin/dashboard" >
+                <Route exact path="/admin" >
                     <Dashboard />
                 </Route>
                 {/* <Route exact path="/admin/public/products" >
@@ -26,6 +27,9 @@ export default function AdminRoutes() {
                 </Route> */}
                 <Route exact path="/admin/add-category" >
                     <AddCategory />
+                </Route>
+                <Route exact path="/admin/update-category/:id" >
+                    <UpdateCategory />
                 </Route>
                 <Route exact path="/admin/category" >
                     <Categories />

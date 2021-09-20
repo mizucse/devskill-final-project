@@ -26,7 +26,7 @@ export default  function NavBar({children}) {
     const cartList = useSelector((store)=>store.cartStore.data);
     const cartLength = cartList?.length;
 
-    console.log(authUser.role,"user authUser.role=====");
+    // console.log(authUser.role,"user authUser.role=====");
 
     const loggedIn = () => {
       let isLoggedIn = true;
@@ -44,8 +44,8 @@ export default  function NavBar({children}) {
     },[]);
   
 
-    console.log(cartList,"user navbar cart list====");
-    console.log(cartList?.length,"user  length navbar cart list====");
+    // console.log(cartList,"user navbar cart list====");
+    // console.log(cartList?.length,"user  length navbar cart list====");
 
     const toggle = () => {
         setState({
@@ -62,13 +62,13 @@ export default  function NavBar({children}) {
     }
 
     const logout = () => {
-      console.log("Inside logout function after logout click");
+      // console.log("Inside logout function after logout click");
       // dispatch(Logout());
       dispatch(signOutAction());
       // history.push('/');
     }
  
-    console.log(loggedIn(), "is logged in check");
+    // console.log(loggedIn(), "is logged in check");
 
     return (
       <Layout>
@@ -86,7 +86,7 @@ export default  function NavBar({children}) {
             </Menu.Item> 
             <Menu.Item key="9" icon={<UserOutlined />}>
               <Link to='/profile'>Profile</Link>
-            </Menu.Item> 
+            </Menu.Item>  
             {/* <Menu.Item key="10" icon={<UploadOutlined />}>
               <div onClick={logout}>Logout</div>
             </Menu.Item> */}

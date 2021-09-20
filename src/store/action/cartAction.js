@@ -4,7 +4,7 @@ import axios from "axios";
 import { history } from "../../utils/helpers/history";
 
 export const setCartData = (product) => {
-    console.log(product, "product received in setCartData=====");
+    // console.log(product, "product received in setCartData=====");
     return {
         type: ActionType.CART_LIST,
         payload: product
@@ -12,7 +12,7 @@ export const setCartData = (product) => {
 }
 
 export const setOrderListData = (product) => {
-    console.log(product, "product received in setOrderListData=====");
+    // console.log(product, "product received in setOrderListData=====");
     return {
         type: ActionType.ORDER_LIST,
         payload: product
@@ -30,12 +30,12 @@ export const cartAction = (productId, qty) => {
 
             dispatch(setCartData(response.data?.products));
             dispatch(getCartAction);
-            alert(response.data.products.message)
+            alert(response.data.products?.message);
             // console.log(response.data,"----- details");
         }catch(error){
             console.log(error,"Product Details view error");
         } 
-    } 
+    }
 }
 
 export const getCartAction = () => {
@@ -46,7 +46,7 @@ export const getCartAction = () => {
             const response = await axios.get(`${BASE_URL}/cart`, { headers: { authorization: `bearer ${token}` } });
              
             dispatch(setCartData(response.data?.products));
-            console.log(response.data,"====get all cart from database===");
+            // console.log(response.data,"====get all cart from database===");
         }catch(error){
             console.log(error,"Cart Product load from getCartAction error");
         } 
@@ -76,7 +76,7 @@ export const OrderListAction = () => {
         try {
             const response = await axios.get(`${BASE_URL}/order/my-order`, { headers: { authorization: `bearer ${token}` } });
              
-            // dispatch(setOrderListData(response.data));
+            dispatch(setOrderListData(response.data));
             console.log(response.data,"====response from OrderListAction===");
             // alert(response.data.message)
         }catch(error){

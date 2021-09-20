@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'; 
 import { useHistory } from 'react-router';
-// import { BASE_URL } from '../../../utils/constants';
+import { BASE_URL } from '../../../utils/constants';
 import { Table, Space, Button} from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { CategoryListAction } from '../../../store/action/categoryAction';
+import { CategoryDeleteAction, CategoryListAction } from '../../../store/action/categoryAction';
  
 
 export default function Categories() {
@@ -18,16 +18,18 @@ export default function Categories() {
       dispatch(CategoryListAction());
     },[]);
 
-    console.log(categoryList,"========categoryList components======");
+    // console.log(categoryList,"========categoryList components======");
 
     const data = categoryList;
     
     const updateCategory = (e, id) => {
         console.log(id, "===== click update category ====");
+        history.push('/admin/update-category/'+id);
     }
     
     const deleteCategory = (e, id) => {
-        console.log(id, "===== click delete category ====");
+        console.log(id, "===== click delete category ===="); 
+        dispatch(CategoryDeleteAction(id));
     }
 
     return (

@@ -31,6 +31,47 @@ export const CategoryAddAction = (categoryAddData) => {
     }
 }
 
+export const CategoryUpdateAction = (categoryid) => { 
+    return async (dispatch, getState) => {
+            const {authStore} = getState();
+            const token = authStore.token;
+            // console.log(token);
+
+        try {
+                const response = await axios.patch(`${BASE_URL}/category/${categoryid}`, {
+                // name: categoryAddData.name,
+                // description: categoryAddData.description 
+            },
+            {
+                headers: { authorization: `bearer ${token}` },
+            }); 
+        }catch(error){
+            console.log(error,"category add errooor");
+        }
+    }
+}
+
+export const CategoryDeleteAction = (categoryid) => { 
+    return async (dispatch, getState) => {
+            const {authStore} = getState();
+            const token = authStore.token;
+            // console.log(token);
+
+        try {
+                const response = await axios.delete(`${BASE_URL}/category/${categoryid}`, {
+                // name: categoryAddData.name,
+                // description: categoryAddData.description 
+            },
+            {
+                headers: { authorization: `bearer ${token}` },
+            });
+            dispatch(CategoryListAction); 
+        }catch(error){
+            console.log(error,"category add errooor");
+        }
+    }
+}
+
    
 
 export const CategoryListAction  = () => { 

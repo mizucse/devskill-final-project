@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Radio } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { CategoryAddAction } from '../../../store/action/categoryAction'; 
+import { useParams } from 'react-router';
  
 
-export default function AddCategory() {
+export default function UpdateCategory() {
     const [form] = Form.useForm();
     const [formLayout, setFormLayout] = useState('inline');
     const dispatch = useDispatch();
+    const {id} = useParams();
    
     const [category, setCategory] = useState({
         name: '', 
@@ -39,7 +41,7 @@ export default function AddCategory() {
 
     return (
         <>
-            <h1>Add New Category</h1>
+            <h1>Update Category</h1>
             <Form {...formItemLayout} layout={formLayout} form={form} initialValues={{ layout: formLayout, }} >
           
         <Form.Item label="Category Name">

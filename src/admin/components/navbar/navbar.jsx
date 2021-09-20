@@ -62,7 +62,7 @@ export default  function AdminNavBar({children}) {
               <Link to='/admin/registration'>Registration</Link>
             </Menu.Item>   */}
             <Menu.Item key="3" icon={<HomeOutlined />}>
-              <Link to='/admin/dashboard'>Dashboard</Link>
+              <Link to='/admin'>Dashboard</Link>
             </Menu.Item>
             {/* <Menu.Item key="11" icon={<AppstoreOutlined />}>
               <Link to='/admin/public/products'>Public Products</Link>
@@ -98,9 +98,9 @@ export default  function AdminNavBar({children}) {
               onClick: toggle,
             })}
             <div  >
-            <Badge count={cartLength}>
+            {/* <Badge count={cartLength}>
                 <ShoppingCartOutlined onClick={(e)=> goToCart()} shape="round" size="large" style={{color: "#fff", fontSize: "24px"}}/>
-            </Badge>
+            </Badge> */}
 
               {/* <ShoppingCartOutlined style={{color: "#fff", fontSize: "22px"}}/>
 
