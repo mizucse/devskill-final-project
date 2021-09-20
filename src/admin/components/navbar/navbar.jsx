@@ -14,10 +14,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../../utils/helpers/history';
 import { signOutAction } from '../../../store/action/signOutAction';
 import { getCartAction } from '../../../store/action/cartAction';
+import { useHistory } from 'react-router';
 
 const { Header, Sider, Content } = Layout;
  
 export default  function AdminNavBar({children}) {
+    const history = useHistory();
     const dispatch = useDispatch();
     const [state,setState] = useState({ collapsed: false, });
     const cartList = useSelector((store)=>store.cartStore.data);
@@ -36,6 +38,10 @@ export default  function AdminNavBar({children}) {
             collapsed: !state.collapsed,
         });
     };
+
+    const goToCart = (e) => { 
+      history.push('/admin/cart');
+    }
 
     const logout = () => {
       console.log("Inside logout function after logout click");
@@ -93,7 +99,7 @@ export default  function AdminNavBar({children}) {
             })}
             <div  >
             <Badge count={cartLength}>
-                <ShoppingCartOutlined shape="round" size="large" style={{color: "#fff", fontSize: "24px"}}/>
+                <ShoppingCartOutlined onClick={(e)=> goToCart()} shape="round" size="large" style={{color: "#fff", fontSize: "24px"}}/>
             </Badge>
 
               {/* <ShoppingCartOutlined style={{color: "#fff", fontSize: "22px"}}/>

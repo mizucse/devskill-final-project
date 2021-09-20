@@ -9,6 +9,7 @@ import Orders from './components/orders/orders';
 import AddCategory from './components/categories/categories.form'; 
 import Users from './components/users/users'; 
 import AddProduct from './components/products/products.form';
+import CartList from './components/cart/cartList';
 
 export default function AdminRoutes() {
     return (
@@ -31,7 +32,7 @@ export default function AdminRoutes() {
                 </Route>
                 <Route path="/admin/products" >
                     <Products />
-                </Route> 
+                </Route>
                 <Route path="/admin/add-product" >
                     <AddProduct />
                 </Route> 
@@ -40,6 +41,9 @@ export default function AdminRoutes() {
                 </Route> 
                 <Route path="/admin/users" >
                     <Users />
+                </Route> 
+                <Route path="/admin/cart" >
+                    <CartList />
                 </Route> 
                 <Route exact path="*" >
                     Not Found

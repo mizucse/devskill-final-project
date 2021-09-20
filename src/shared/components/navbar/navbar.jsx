@@ -1,60 +1,129 @@
-import React from "react";
+import React, { useEffect } from 'react'; 
+import {useState} from 'react';
+import { Link } from 'react-router-dom';
+import { Layout, Menu, Badge, Image } from 'antd';
+import Logout from '../../../shared/components/logout/logout'; 
+import {
+  MenuUnfoldOutlined, UnorderedListOutlined, DatabaseOutlined, PlusCircleOutlined, PicCenterOutlined,
+  MenuFoldOutlined,PlusSquareOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+  UploadOutlined,HomeOutlined, AppstoreOutlined, SettingOutlined,ShoppingCartOutlined
+} from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../../../utils/helpers/history';
+import { signOutAction } from '../../../store/action/signOutAction';
+import { getCartAction } from '../../../store/action/cartAction';
+import { useHistory } from 'react-router'; 
 
-import { Layout, Menu, Breadcrumb } from "antd"; 
-import { HomeOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+const { Header, Sider, Content } = Layout;
+ 
+export default  function NavBar({children}) {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const [state,setState] = useState({ collapsed: false, });
+    const authUser = useSelector((store)=>store.authStore);
+    const cartList = useSelector((store)=>store.cartStore.data);
+    const cartLength = cartList?.length;
 
-const { Header, Content, Footer } = Layout;
-const { SubMenu } = Menu;
+    console.log(authUser.role,"user authUser.role=====");
 
-export default function Navbar() {
-  return (
-    <>
-      {/* <Layout>
-        <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-          <div className="logo" />
-          <div  >
-            <div >
-            <Menu theme="dark" mode="horizontal">
-                <Menu.Item  icon={<HomeOutlined />}>
-                Home
-                </Menu.Item>
-                <Menu.Item key="app" icon={<AppstoreOutlined />}>
-                Products
-                </Menu.Item>
-                 
-                <Menu.Item key="alipay">
-                <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-                    Navigation Four - Link
-                </a>
-                </Menu.Item>
-            </Menu> 
-            </div>
+    const loggedIn = () => {
+      let isLoggedIn = true;
+
+      if(authUser.role == null || authUser.token == null || authUser.email == null){
+        isLoggedIn = false;
+      }
+       
+
+      return isLoggedIn;
+    }
+
+    useEffect(()=>{
+      dispatch(getCartAction());
+    },[]);
+  
+
+    console.log(cartList,"user navbar cart list====");
+    console.log(cartList?.length,"user  length navbar cart list====");
+
+    const toggle = () => {
+        setState({
+            collapsed: !state.collapsed,
+        });
+    };
+
+    const goToCart = (e) => { 
+      history.push('/cart');
+    }
+
+    const login = (e) => { 
+      history.push('/login');
+    }
+
+    const logout = () => {
+      console.log("Inside logout function after logout click");
+      // dispatch(Logout());
+      dispatch(signOutAction());
+      // history.push('/');
+    }
+ 
+    console.log(loggedIn(), "is logged in check");
+
+    return (
+      <Layout>
+        <Sider trigger={null} collapsible collapsed={state.collapsed}>
+          <div className="logo" style={{color: '#fff', fontSize: '18px',lineHeight: '60px',textAlign: 'center',fontWeight: 'bold'}} >
+            MI TECH
+          </div>
+          <Menu theme="dark" style={{color: "#fff"}} mode="inline" defaultSelectedKeys={['1']}>
             
-          </div>
-        </Header>
-        <Content
-          className="site-layout"
-          style={{ padding: "0 50px", marginTop: 64 }}
-        >
-          <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
-          <div
+            <Menu.Item key="3" icon={<HomeOutlined />}>
+              <Link to='/'>Home</Link>
+            </Menu.Item> 
+            <Menu.Item key="4" icon={<UnorderedListOutlined />}>
+              <Link to='/orders'>Order List</Link>
+            </Menu.Item> 
+            <Menu.Item key="9" icon={<UserOutlined />}>
+              <Link to='/profile'>Profile</Link>
+            </Menu.Item> 
+            {/* <Menu.Item key="10" icon={<UploadOutlined />}>
+              <div onClick={logout}>Logout</div>
+            </Menu.Item> */}
+          </Menu>
+        </Sider>
+        <Layout className="site-layout">
+          <Header className="site-layout-background" style={{ padding: "0 30px 0 0",  display: 'flex', justifyContent: "space-between", alignItems: "center", paddingRight: "30px" }} >
+            {React.createElement(state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+              className: 'trigger',
+              style: {color: "#fff"},
+              onClick: toggle,
+            })}
+            <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}} >
+              <Badge count={cartLength}>
+                  <ShoppingCartOutlined onClick={(e)=> goToCart()} shape="round" size="large" style={{color: "#fff", fontSize: "24px"}}/>
+              </Badge>
+               {
+               !loggedIn() && <h1 style={{color: "#fff", paddingLeft: "20px"}} onClick={(e)=> login()}>{<UserOutlined />} Login</h1>
+               }
+               {
+               loggedIn() && <h1 style={{color: "#fff", paddingLeft: "20px", cursor: "pointer"}} onClick={logout}>{<UploadOutlined />} Logout</h1>
+               }
+              
+            </div>
+          </Header>
+          <Content
             className="site-layout-background"
-            style={{ padding: 24, minHeight: 420 }}
+            style={{
+              margin: '24px 16px',
+              padding: 24,
+              minHeight: '100vh',
+            }}
           >
-            Content
-          </div>
-        </Content>
-        <Footer style={{ textAlign: "center" }}>
-          MI TECH ©2021 All Rights Reserved.
-        </Footer>
-      </Layout> */}
-    </>
-  );
+            {children}
+          </Content>
+        </Layout>
+      </Layout>
+    ); 
 }
-
-///======================
  

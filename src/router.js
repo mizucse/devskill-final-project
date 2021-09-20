@@ -4,6 +4,7 @@ import Admin from './admin/admin';
 import Shared from './shared/shared';
 import Login from './shared/components/login/login';
 import Signup from './shared/components/signup/signup';
+import ProtectedAdminRoute from './admin/adminRouteProtected';
 
 export default function Router() {
     return (
@@ -12,7 +13,9 @@ export default function Router() {
                 Not Found
             </Route>
             <Route path="/admin" >
-                <Admin />
+                <ProtectedAdminRoute>
+                    <Admin />
+                </ProtectedAdminRoute>
             </Route>
             <Route exact path="/login" >
                 <Login />

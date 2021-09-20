@@ -20,7 +20,7 @@ export const cartAction = (productId, qty) => {
                 product: { id: productId, quantity: qty }
             }, { headers: { authorization: `bearer ${token}` } });
 
-            dispatch(setCartData(response.data?.product));
+            dispatch(setCartData(response.data?.products));
             dispatch(getCartAction);
             // console.log(response.data,"----- details");
         }catch(error){
@@ -40,6 +40,21 @@ export const getCartAction = () => {
             console.log(response.data,"====get all cart from database===");
         }catch(error){
             console.log(error,"Cart Product load from getCartAction error");
+        } 
+    } 
+}
+
+export const CheckOutAction = () => {
+    return async (dispatch, getState) => { 
+        const {authStore} = getState();
+        const token = authStore.token; 
+        try {
+            const response = await axios.get(`${BASE_URL}/order/checkout`, { headers: { authorization: `bearer ${token}` } });
+             
+            // dispatch(setCartData(response.data));
+            console.log(response.data,"====response from checkoutAction===");
+        }catch(error){
+            console.log(error,"response from checkoutAction error");
         } 
     } 
 }
