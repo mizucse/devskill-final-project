@@ -74,7 +74,7 @@ export default  function NavBar({children}) {
       <Layout>
         <Sider trigger={null} collapsible collapsed={state.collapsed}>
           <div className="logo" style={{color: '#fff', fontSize: '18px',lineHeight: '60px',textAlign: 'center',fontWeight: 'bold'}} >
-            MI TECH
+          <Link to='/'>MI TECH</Link>
           </div>
           <Menu theme="dark" style={{color: "#fff"}} mode="inline" defaultSelectedKeys={['1']}>
             

@@ -11,6 +11,14 @@ export const setCartData = (product) => {
     }
 }
 
+export const setOrderListData = (product) => {
+    console.log(product, "product received in setOrderListData=====");
+    return {
+        type: ActionType.ORDER_LIST,
+        payload: product
+    }
+}
+
 export const cartAction = (productId, qty) => {
     return async (dispatch, getState) => { 
         const {authStore} = getState();
@@ -22,6 +30,7 @@ export const cartAction = (productId, qty) => {
 
             dispatch(setCartData(response.data?.products));
             dispatch(getCartAction);
+            alert(response.data.products.message)
             // console.log(response.data,"----- details");
         }catch(error){
             console.log(error,"Product Details view error");
@@ -53,8 +62,25 @@ export const CheckOutAction = () => {
              
             // dispatch(setCartData(response.data));
             console.log(response.data,"====response from checkoutAction===");
+            // alert(response.data.message)
         }catch(error){
             console.log(error,"response from checkoutAction error");
+        } 
+    } 
+}
+
+export const OrderListAction = () => {
+    return async (dispatch, getState) => { 
+        const {authStore} = getState();
+        const token = authStore.token; 
+        try {
+            const response = await axios.get(`${BASE_URL}/order/my-order`, { headers: { authorization: `bearer ${token}` } });
+             
+            // dispatch(setOrderListData(response.data));
+            console.log(response.data,"====response from OrderListAction===");
+            // alert(response.data.message)
+        }catch(error){
+            console.log(error,"response from OrderListAction error");
         } 
     } 
 }

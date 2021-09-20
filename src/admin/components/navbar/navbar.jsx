@@ -64,9 +64,9 @@ export default  function AdminNavBar({children}) {
             <Menu.Item key="3" icon={<HomeOutlined />}>
               <Link to='/admin/dashboard'>Dashboard</Link>
             </Menu.Item>
-            <Menu.Item key="11" icon={<AppstoreOutlined />}>
+            {/* <Menu.Item key="11" icon={<AppstoreOutlined />}>
               <Link to='/admin/public/products'>Public Products</Link>
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item key="4" icon={<UnorderedListOutlined />}>
               <Link to='/admin/orders'>Order List</Link>
             </Menu.Item>

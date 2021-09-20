@@ -18,12 +18,12 @@ export default function AdminRoutes() {
                 <Route exact path="/admin/dashboard" >
                     <Dashboard />
                 </Route>
-                <Route exact path="/admin/public/products" >
+                {/* <Route exact path="/admin/public/products" >
                     <PublicProducts />
-                </Route>
-                <Route exact path="/admin/public/product/:id" >
+                </Route> */}
+                {/* <Route exact path="/admin/public/product/:id" >
                     <ProductDetails />
-                </Route>
+                </Route> */}
                 <Route exact path="/admin/add-category" >
                     <AddCategory />
                 </Route>
