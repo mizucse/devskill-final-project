@@ -30,8 +30,14 @@ export const cartAction = (productId, qty) => {
 
             dispatch(setCartData(response.data?.products));
             dispatch(getCartAction);
-            alert(response.data.products?.message);
-            // console.log(response.data,"----- details");
+            alert(response.data);
+            console.log(response.data,"----- details");
+            
+            if(response.err.message == "jwt malformed"){
+                alert('Your have to login first');
+            }
+                
+
         }catch(error){
             console.log(error,"Product Details view error");
         } 

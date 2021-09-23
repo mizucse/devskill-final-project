@@ -52,16 +52,14 @@ export const CategoryUpdateAction = (categoryid) => {
 }
 
 export const CategoryDeleteAction = (categoryid) => { 
+  console.log(categoryid, "category id==== in CategoryDeleteAction");
     return async (dispatch, getState) => {
             const {authStore} = getState();
             const token = authStore.token;
             // console.log(token);
 
         try {
-                const response = await axios.delete(`${BASE_URL}/category/${categoryid}`, {
-                // name: categoryAddData.name,
-                // description: categoryAddData.description 
-            },
+                const response = await axios.delete(`${BASE_URL}/category/${categoryid}`, {},
             {
                 headers: { authorization: `bearer ${token}` },
             });

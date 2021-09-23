@@ -48,8 +48,8 @@ export default function AddProduct() {
   });
 
   const productCatInfo = (e, dataType) => {
-    console.log(e);
-    console.log(dataType);
+    // console.log(e);
+    // console.log(dataType);
     setAddProductData(
       { ...addProductData, category: {...addProductData.category,[dataType]: e}}
     );

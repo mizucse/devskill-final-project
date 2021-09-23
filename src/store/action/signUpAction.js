@@ -1,6 +1,7 @@
 import { ActionType } from "../actionType";
-import { BASE_URL } from "../../utils/constants";
+import { BASE_URL, SUCCESS, ERROR, INFO, WARNING } from "../../utils/constants";
 import axios from "axios"; 
+import Alerts from '../../utils/alert'; 
 
 export const setUserSignUpData = (signUpData) => {
     return {
@@ -15,16 +16,29 @@ export const signUpAction = (signUpData) => {
                 const response = await axios.post(`${BASE_URL}/signup`, {
                 email: signUpData.email,
                 username: signUpData.username,
+                password: signUpData.password,
                 firstname: signUpData.firstname,
                 lastname: signUpData.lastname,
+                address: {
+                    city: signUpData.address.city,
+                    street: signUpData.address.street,
+                    number: signUpData.address.number,
+                    zipcode: signUpData.address.zipcode,
+                    geolocation: {
+                        lat: signUpData.geolocation.lat,
+                        long: signUpData.geolocation.long,
+                    },
+                },
                 phone: signUpData.phone,
-                password: signUpData.password  
             });
+            console.log(response,"=======response ====response==== ");
+            if(response.data?.status == 200){
+                Alerts(SUCCESS,"Registration Successful");
+            }
             dispatch(setUserSignUpData(response.data));
         }catch(error){
             console.log(error,"signup errooor");
-        }
-
+        } 
     }
 }
 

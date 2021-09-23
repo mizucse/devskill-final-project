@@ -27,3 +27,10 @@ export const REJECTED_ORDERS = "/admin/rejected-orders";
 export const HOME = "/";
 export const PRODUCT_DETAIL = "/product-details";
 export const CART = "/cart";
+
+export const SUCCESS = "SUCCESS";
+export const ERROR = "ERROR";
+export const WARNING = "WARNING";
+export const INFO = "INFO";
+
+
