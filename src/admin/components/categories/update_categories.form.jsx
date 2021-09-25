@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Radio } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'; 
-import { CategoryAddAction } from '../../../store/action/categoryAction'; 
+import { CategoryUpdateAction } from '../../../store/action/categoryAction'; 
 import { useParams } from 'react-router';
  
 
@@ -9,18 +9,20 @@ export default function UpdateCategory() {
     const [form] = Form.useForm();
     const [formLayout, setFormLayout] = useState('inline');
     const dispatch = useDispatch();
-    const {id} = useParams();
-   
+    const {id} = useParams();  
+  
+    const categoryInfo  = useSelector((store) => store.categorForUpdateStore.categoryDetails);
+    
     const [category, setCategory] = useState({
         name: '', 
         description: '', 
     });
-    const addCategory = (e,key) => {
+    const changeCategory = (e,key) => {
       setCategory({...category,[key]: e.target.value})
     }
-    const submitAddCategory =() => {
-      console.log(category, "=== add Category Data ====");
-      dispatch(CategoryAddAction(category)); 
+    const submitUpdateCategory =() => {
+      console.log(category, "=== add Category Data ====>>>", id, "=======cat id====" );
+      dispatch(CategoryUpdateAction(category, id)); 
     }
 
     
@@ -45,13 +47,13 @@ export default function UpdateCategory() {
             <Form {...formItemLayout} layout={formLayout} form={form} initialValues={{ layout: formLayout, }} >
           
         <Form.Item label="Category Name">
-            <Input placeholder="Input Category Name" value={category.name} onChange={e=> addCategory(e,'name')} />
+            <Input placeholder="Input Category Name" value={categoryInfo.name} onChange={e=> changeCategory(e,'name')} />
         </Form.Item>
         <Form.Item label="Category Description">
-            <Input placeholder="Input Category Description"  value={category.description} onChange={e=> addCategory(e,'description')} />
+            <Input placeholder="Input Category Description"  value={categoryInfo.description} onChange={e=> changeCategory(e,'description')} />
         </Form.Item>
         <Form.Item  >
-            <Button onClick={() => submitAddCategory()} type="primary">Submit</Button>
+            <Button onClick={() => submitUpdateCategory()} type="primary">Submit</Button>
         </Form.Item>
       </Form>
         </>

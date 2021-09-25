@@ -1,20 +1,26 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { BASE_URL } from "../../../utils/constants";
 import { Form, Input, Button, Checkbox, Row, Col, Divider, Select } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined, PhoneOutlined, AimOutlined, BorderOutlined, } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams, Link} from 'react-router-dom';
 
-import { adminAddUserAction } from "../../../store/action/userAction";
+import { GetUserDetailsAction, adminUpdateUserAction } from "../../../store/action/userAction";
 
-export default function AddUser() {
-  const style = { padding: "8px 0" };
+export default function UpdateUser() {
+    const {id} = useParams();
+    const style = { padding: "8px 0" };
+    const dispatch = useDispatch();
+    const userInfo = useSelector((store)=>store.userDetailsStore.userDetails)
+    const { Option } = Select;
+  
+    console.log(userInfo.username, "====== in userInfo.role ======");
+    useEffect(() => {
+        dispatch(GetUserDetailsAction(id));
+    },[]);
 
-  const dispatch = useDispatch();
-  const { Option } = Select;
-
-  const [signUpData, setSignUpData] = useState({
+  const [userData, setUserData] = useState({
     role: "",
     firstname: "",
     lastname: "",
@@ -35,31 +41,31 @@ export default function AddUser() {
   });
 
   const signupInfo = (e, dataType) => {
-    setSignUpData({ ...signUpData, [dataType]: e.target.value });
+    setUserData({ ...userData, [dataType]: e.target.value });
   };
 
   const addressInfo = (e, dataType) => {
-    setSignUpData({
-      ...signUpData,
-      address: { ...signUpData.address, [dataType]: e.target.value },
+    setUserData({
+      ...userData,
+      address: { ...userData.address, [dataType]: e.target.value },
     });
   };
 
   const geolocationInfo = (e, dataType) => {
-    setSignUpData({
-      ...signUpData,
-      geolocation: { ...signUpData.geolocation, [dataType]: e.target.value },
+    setUserData({
+      ...userData,
+      geolocation: { ...userData.geolocation, [dataType]: e.target.value },
     });
   };
 
   const userType = (value) => {
     // console.log(`selected ${value}`);
-    setSignUpData({ ...signUpData, role: value });
+    setUserData({ ...userData, role: value });
   };
   const signupSubmit = () => {
-    console.log(signUpData, "signupdata===");
+    console.log(userData, "userData===");
 
-    dispatch(adminAddUserAction(signUpData));
+    dispatch(adminUpdateUserAction(userData,id));
   };
 
   const onFinish = (values) => {
@@ -71,7 +77,7 @@ export default function AddUser() {
   return (
     <Row align="middle">
       <Col>
-        <h1 style={{ textAlign: "center" }}>Add New User</h1>
+        <h1 style={{ textAlign: "center" }}>Update User</h1>
         <Form
           name="normal_login"
           className="login-form"
@@ -84,7 +90,7 @@ export default function AddUser() {
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col className="gutter-row" span={6}>
               <div style={style}>
-                <Form.Item
+                <Form.Item 
                   name="firstname"
                   rules={[
                     {
@@ -94,6 +100,7 @@ export default function AddUser() {
                   ]}
                 >
                   <Input
+                    value={userData.firstname} 
                     onKeyUp={(e) => signupInfo(e, "firstname")}
                     prefix={<UserOutlined className="site-form-item-icon" />}
                     placeholder="First Name"
@@ -113,6 +120,7 @@ export default function AddUser() {
                   ]}
                 >
                   <Input
+                    value={userInfo.username}
                     onKeyUp={(e) => signupInfo(e, "lastname")}
                     prefix={<UserOutlined className="site-form-item-icon" />}
                     placeholder="Last Name"
@@ -123,15 +131,18 @@ export default function AddUser() {
             <Col className="gutter-row" span={6}>
               <div style={style}>
                 <Form.Item
-                  name="email"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your email!",
-                    },
-                  ]}
+                    initialValues={userInfo.email}
+                    name="email"
+                    rules={[
+                        {
+                        required: true,
+                        message: "Please input your email!",
+                        },
+                    ]}
                 >
                   <Input
+                    value={userData.email} 
+                    initialValues="test@gmail.com"
                     onKeyUp={(e) => signupInfo(e, "email")}
                     prefix={<MailOutlined className="site-form-item-icon" />}
                     placeholder="email"
@@ -151,6 +162,7 @@ export default function AddUser() {
                   ]}
                 >
                   <Input
+                    value={userData.phone} 
                     onKeyUp={(e) => signupInfo(e, "phone")}
                     prefix={<PhoneOutlined className="site-form-item-icon" />}
                     placeholder="Phone Number"
@@ -170,6 +182,7 @@ export default function AddUser() {
                   ]}
                 >
                   <Input
+                    value={userData.address.city} 
                     onKeyUp={(e) => addressInfo(e, "city")}
                     prefix={<AimOutlined className="site-form-item-icon" />}
                     placeholder="City"
@@ -189,6 +202,7 @@ export default function AddUser() {
                   ]}
                 >
                   <Input
+                    value={userData.address.street} 
                     onKeyUp={(e) => addressInfo(e, "street")}
                     prefix={<AimOutlined className="site-form-item-icon" />}
                     placeholder="Street"
@@ -208,6 +222,7 @@ export default function AddUser() {
                   ]}
                 >
                   <Input
+                    value={userData.address.number} 
                     onKeyUp={(e) => addressInfo(e, "number")}
                     prefix={<AimOutlined className="site-form-item-icon" />}
                     placeholder="Number"
@@ -227,6 +242,7 @@ export default function AddUser() {
                   ]}
                 >
                   <Input
+                    value={userData.address.zipcode} 
                     onKeyUp={(e) => addressInfo(e, "zipcode")}
                     prefix={<AimOutlined className="site-form-item-icon" />}
                     placeholder="Zipcode"
@@ -246,6 +262,7 @@ export default function AddUser() {
                   ]}
                 >
                   <Input
+                    value={userData.address.geolocation.lat} 
                     onKeyUp={(e) => geolocationInfo(e, "lat")}
                     prefix={<AimOutlined className="site-form-item-icon" />}
                     placeholder="Latitude"
@@ -265,6 +282,7 @@ export default function AddUser() {
                   ]}
                 >
                   <Input
+                    value={userData.address.geolocation.long} 
                     onKeyUp={(e) => geolocationInfo(e, "long")}
                     prefix={<AimOutlined className="site-form-item-icon" />}
                     placeholder="Longitude"
@@ -285,6 +303,7 @@ export default function AddUser() {
                   ]}
                 >
                   <Input
+                    value={userData.username} 
                     autoComplete="off"
                     onKeyUp={(e) => signupInfo(e, "username")}
                     prefix={<UserOutlined className="site-form-item-icon" />}
@@ -306,6 +325,7 @@ export default function AddUser() {
                   ]}
                 >
                   <Input
+                    value={userData.password} 
                     onKeyUp={(e) => signupInfo(e, "password")}
                     prefix={
                       <LockOutlined
@@ -323,7 +343,7 @@ export default function AddUser() {
             <Col className="gutter-row" span={6}>
               <div style={style}>
                 <Select
-                  defaultValue="user"
+                    value={userData.role} 
                   onChange={userType}
                   style={{ width: "100%" }}
                 >

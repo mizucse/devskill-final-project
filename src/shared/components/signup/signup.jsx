@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
-import { signUpAction } from "../../../store/action/signUpAction";
+import { signUpAction } from "../../../store/action/userAction";
 
 export default function Signup() {
   const style = { padding: "8px 0" };
@@ -51,7 +51,7 @@ export default function Signup() {
     setSignUpData({...signUpData, geolocation:{...signUpData.geolocation,[dataType]: e.target.value}});
   };
   const signupSubmit = () => {
-    console.log(signUpData,"signupdata===");
+    // console.log(signUpData,"signupdata===");
 
     dispatch(signUpAction(signUpData));
   };

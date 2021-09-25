@@ -6,7 +6,7 @@ const cat = {
     category : []
   };
 
-const CategoryReducer = (state = cat, action) => {
+export const CategoryReducer = (state = cat, action) => {
  
 
     switch(action.type) {
@@ -22,4 +22,22 @@ const CategoryReducer = (state = cat, action) => {
     }
 }
 
-export default CategoryReducer;
+const categoryDetails = {
+    categoryDetails: {}
+}
+
+export const CategoryForUpdateReducer = (state = categoryDetails, action) => {
+ 
+
+    switch(action.type) {
+        case ActionType.SET_CATEGORY_FOR_UPDATE:
+            return {
+                ...categoryDetails,
+                // name: action.payload.categoryInfo.name,
+                // description: action.payload.categoryInfo.description, 
+                categoryDetails : action.payload,
+            }
+            default :
+                return state;
+    }
+}

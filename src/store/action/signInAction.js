@@ -3,6 +3,7 @@ import { BASE_URL,ADMIN, HOME } from "../../utils/constants";
 import axios from "axios"; 
 import { history } from "../../utils/helpers/history";
 import Dashboard from "../../admin/components/dashboard/dashboard";
+import notificationWithIcon from "../../utils/notification";
 
 
 export const setUserSignInData = (user) => {
@@ -18,14 +19,24 @@ export const signInAction = (user) => {
             email: user.email,
             password: user.password,
         });
-        dispatch(setUserSignInData(response.data));
-        console.log(response.data.userInfo.role,"=====signInAction role=====");
-        console.log(response.data.message,"=====signInAction msg=====");
-        if(response.data?.userInfo.role == "admin")
-            history.push('/admin');
-        else{ 
-            history.push('/');
+        // alert(response.data?.message);
+
+        if(response.data.message !== "User not found"  &&  response.data.message !== "Wrong Password"){
+            notificationWithIcon('success',"Login Successful"); 
+            dispatch(setUserSignInData(response.data));
+            if(response.data?.userInfo.role == "admin"){
+                history.push('/admin');
+                window.location.reload();
+            }else{
+                history.push('/');
+                window.location.reload();
+            }
+        }else { 
+            notificationWithIcon('error',response.data.message);
         }
-        window.location.reload();
+            // alert(response.data.status);
+        // console.log(response.data.userInfo.role,"=====signInAction role=====");
+        // console.log(response.data,"=====signInAction msg=====");
+        // window.location.reload();
      }
 }

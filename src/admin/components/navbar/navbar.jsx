@@ -6,13 +6,13 @@ import Logout from '../../../shared/components/logout/logout';
 import {
   MenuUnfoldOutlined, UnorderedListOutlined, DatabaseOutlined, PlusCircleOutlined, PicCenterOutlined,
   MenuFoldOutlined,PlusSquareOutlined,
-  UserOutlined,
+  UserOutlined,UserAddOutlined,
   VideoCameraOutlined,
   UploadOutlined,HomeOutlined, AppstoreOutlined, SettingOutlined,ShoppingCartOutlined
 } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../../utils/helpers/history';
-import { signOutAction } from '../../../store/action/signOutAction';
+import { SignOutAction } from '../../../store/action/signOutAction';
 import { getCartAction } from '../../../store/action/cartAction';
 import { useHistory } from 'react-router';
 
@@ -30,8 +30,8 @@ export default  function AdminNavBar({children}) {
     },[]);
   
 
-    console.log(cartList,"navbar cart list====");
-    console.log(cartList?.length,"length navbar cart list====");
+    // console.log(cartList,"navbar cart list====");
+    // console.log(cartList?.length,"length navbar cart list====");
 
     const toggle = () => {
         setState({
@@ -46,7 +46,7 @@ export default  function AdminNavBar({children}) {
     const logout = () => {
       console.log("Inside logout function after logout click");
       // dispatch(Logout());
-      dispatch(signOutAction());
+      dispatch(SignOutAction());
       // history.push('/');
     }
  
@@ -57,10 +57,7 @@ export default  function AdminNavBar({children}) {
           <Menu theme="dark" style={{color: "#fff"}} mode="inline" defaultSelectedKeys={['1']}>
             {/* <Menu.Item key="1" icon={<UserOutlined />}>
               <Link to='/admin/login'>Login</Link>
-            </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              <Link to='/admin/registration'>Registration</Link>
-            </Menu.Item>   */}
+            </Menu.Item>*/}
             <Menu.Item key="3" icon={<HomeOutlined />}>
               <Link to='/admin'>Dashboard</Link>
             </Menu.Item>
@@ -85,6 +82,9 @@ export default  function AdminNavBar({children}) {
             <Menu.Item key="9" icon={<UserOutlined />}>
               <Link to='/admin/users'>User List</Link>
             </Menu.Item> 
+            <Menu.Item key="2" icon={<UserAddOutlined />}>
+              <Link to='/admin/add-user'>Add New User</Link>
+            </Menu.Item>   
             <Menu.Item key="10" icon={<UploadOutlined />}>
               <div onClick={logout}>Logout</div>
             </Menu.Item>

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { BASE_URL } from '../../../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetAllProductAction } from '../../../store/action/productAction';
-import { Table, Tag, Space, Button, Image} from 'antd';
+import { GetAllProductAction, DeleteProductAction, setProductDetailsData } from '../../../store/action/productAction';
+import { Table, Tag, Space, Button, Image, Popconfirm} from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
  
 
 export default function Products() {
@@ -24,10 +25,14 @@ export default function Products() {
     
     const updateProduct = (e, id) => {
         console.log(id, "===== click update product ====");
+        dispatch(setProductDetailsData(id));
+        history.push(`/admin/update-product/${id}`);
     }
     
     const deleteProduct = (e, id) => {
+        dispatch(DeleteProductAction(id));
         console.log(id, "===== click delete product ====");
+        
     }
 
     return (
@@ -54,7 +59,10 @@ export default function Products() {
             render={(text, record) => (
                 <Space size="middle">
                     <Button value={record.category.name} onClick={(e)=>updateProduct(e, record._id)} type="primary">Update</Button>
-                    <Button  onClick={(e)=>deleteProduct(e, record._id)} type="danger">Delete</Button>
+                    <Popconfirm onConfirm={(e)=>deleteProduct(e, record._id)} title="Are you sure？" icon={<QuestionCircleOutlined style={{ color: 'red' }} />}>
+                        <Button type="danger">Delete</Button>
+                    </Popconfirm>
+
                 </Space>
             )}
             />

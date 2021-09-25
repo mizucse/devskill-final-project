@@ -35,9 +35,7 @@ export const cartAction = (productId, qty) => {
             
             if(response.err.message == "jwt malformed"){
                 alert('Your have to login first');
-            }
-                
-
+            } 
         }catch(error){
             console.log(error,"Product Details view error");
         } 

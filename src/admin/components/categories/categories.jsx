@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'; 
 import { useHistory } from 'react-router';
 import { BASE_URL } from '../../../utils/constants';
-import { Table, Space, Button} from 'antd';
+import { Table, Space, Button, Popconfirm} from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { CategoryDeleteAction, CategoryListAction } from '../../../store/action/categoryAction';
+import { CategoryDeleteAction, CategoryListAction, SingleCategorySetForUpdateAction } from '../../../store/action/categoryAction';
  
 
 export default function Categories() {
@@ -24,6 +25,7 @@ export default function Categories() {
     
     const updateCategory = (e, id) => {
         console.log(id, "===== click update category ====");
+        dispatch(SingleCategorySetForUpdateAction(id));
         history.push('/admin/update-category/'+id);
     }
     
@@ -44,7 +46,9 @@ export default function Categories() {
             render={(text, record) => (
                 <Space size="middle">
                     <Button value={record._id} onClick={(e)=>updateCategory(e, record._id)} type="primary">Update</Button>
-                    <Button  onClick={(e)=>deleteCategory(e, record._id)} type="danger">Delete</Button>
+                    <Popconfirm onConfirm={(e)=>deleteCategory(e, record._id)} title="Are you sure？" icon={<QuestionCircleOutlined style={{ color: 'red' }} />}>
+                        <Button type="danger">Delete</Button>
+                    </Popconfirm>
                 </Space>
             )}
             />

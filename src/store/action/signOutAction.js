@@ -1,8 +1,13 @@
+import React from "react";
 import { history } from "../../utils/helpers/history";
-import { ActionType } from "../actionType"; 
+// import { useHistory } from 'react-router';
+import { ActionType } from "../actionType";
 
 
-export const signOutAction = () => {
+
+export const SignOutAction = () => {
+    // const history = useHistory();
+
     return async (dispatch, action) => { 
         dispatch(SignOutData());
         history.push('/login');
