@@ -6,9 +6,16 @@ import ProductDetails from './components/product/product.view';
 // import Categories from './components/categories/categories'; 
 import Orders from './components/orders/order.list';  
 // import Users from './components/users/users';  
-import CartList from '../../src/admin/components/cart/cartList';
+import CartList from './components/cart/cartList';
+import { useSelector } from 'react-redux';
+import Login from './components/login/login';
+import Profile from './components/profile/profile.view';
 
 export default function UserRoutes() {
+    const userInfo = useSelector(store => store.authStore);
+    const role = userInfo.role;
+    const token = userInfo.token;
+    // alert(token);
     return (
         <>
             <Switch> 
@@ -18,11 +25,22 @@ export default function UserRoutes() {
                 <Route exact path="/product/:id" >
                     <ProductDetails />
                 </Route> 
-                <Route path="/orders" >
-                    <Orders />
-                </Route>
+                {
+                    token ? 
+                    <Route path="/orders" >
+                        <Orders />
+                    </Route> : 
+                    <Route path="/login" >
+                        <Login />
+                    </Route>
+                }
+                
                 <Route path="/cart" >
                     <CartList />
+                </Route> 
+                
+                <Route path="/profile" >
+                    <Profile />
                 </Route> 
                 <Route exact path="*" >
                     Not Found

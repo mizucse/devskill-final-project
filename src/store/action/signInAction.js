@@ -13,7 +13,7 @@ export const setUserSignInData = (user) => {
     }
 }
 
-export const signInAction = (user) => {
+export const SignInAction = (user) => {
     return async (dispatch, action) => {
         const response = await axios.post(`${BASE_URL}/signin`, {
             email: user.email,
@@ -27,7 +27,7 @@ export const signInAction = (user) => {
             if(response.data?.userInfo.role == "admin"){
                 history.push('/admin');
                 window.location.reload();
-            }else{
+            }else{ 
                 history.push('/');
                 window.location.reload();
             }

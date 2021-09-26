@@ -184,7 +184,22 @@ export const GetUserDetailsAction = (id) => {
             dispatch(setUserDetailstData(response.data));
         }catch(error){
             console.log(error,"Get User Details  Error");
-        }
-
+        } 
+    }
+} 
+export const GetProfileDetailsAction = () => { 
+    return async (dispatch, getState) => { 
+        const {authStore} = getState();
+        const token = authStore.token;
+        try {
+            const response = await axios.get(`${BASE_URL}/my-detail`,
+            {
+                headers: { authorization: `bearer ${token}` },
+            });
+            dispatch(setUserDetailstData(response.data));
+            // console.log(response.data,"----- details");
+        }catch(error){
+            console.log(error,"Product Details view error");
+        } 
     }
 }

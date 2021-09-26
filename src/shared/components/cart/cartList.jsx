@@ -40,9 +40,12 @@ export default function CartList() {
             <Column title="Total" render={(text, record) => (record.quantity*record.productId.price)} /> 
             </ColumnGroup>
         </Table>
-        <div> 
+        {
+          cartList ? <div> 
           <Button onClick={(e)=>checkOut()} type="primary">Proceed to Checkout</Button>
-        </div>
+        </div> : <></>
+        }
+        
         </>
     )
 }

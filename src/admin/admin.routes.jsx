@@ -12,7 +12,7 @@ import AddUser from './components/users/users.form';
 import UpdateUser from './components/users/users.update.form'; 
 import AddProduct from './components/products/products.form';
 import UpdateProduct from './components/products/product.update';
-import CartList from './components/cart/cartList';
+// import CartList from '../../components/cart/cartList';
 import UpdateCategory from './components/categories/update_categories.form';
 
 export default function AdminRoutes() {
@@ -58,9 +58,9 @@ export default function AdminRoutes() {
                 <Route path="/admin/user-update/:id" >
                     <UpdateUser />
                 </Route> 
-                <Route path="/admin/cart" >
+                {/* <Route path="/admin/cart" >
                     <CartList />
-                </Route> 
+                </Route>  */}
                 <Route exact path="*" >
                     Not Found
                 </Route>

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Checkbox, Row, Col , Typography } from 'antd'; 
+import { Form, Input, Button, Checkbox, Row, Col , Typography, Image } from 'antd'; 
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux'; 
-import { signInAction } from '../../../store/action/signInAction';
+import { SignInAction } from '../../../store/action/signInAction';
 
 
 export default function Login() {
@@ -28,7 +28,7 @@ export default function Login() {
   console.log(authUserInfo,"authUser info from redux store ");
 
   const submitLogin = () => {
-    dispatch(signInAction(loginData)); 
+    dispatch(SignInAction(loginData)); 
   }
     
 
@@ -43,8 +43,11 @@ export default function Login() {
 
   return (
     <Row align="middle" style={{height: '100vh'}}>
-      <Col span={12} offset={6}>
+      <Col span={8} offset={8}>
         
+      <div style={{textAlign: 'center'}}>
+        <Link to="/"><Image  width={100} src="logo.png" preview={false}/></Link>
+      </div>
       <Title style={{textAlign: 'center'}}>User Login</Title>
       <Form
       name="normal_login"

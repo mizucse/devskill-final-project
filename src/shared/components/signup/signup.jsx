@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { BASE_URL } from "../../../utils/constants";
-import { Form, Input, Button, Checkbox, Row, Col, Divider } from "antd";
+import { Form, Input, Button, Checkbox, Row, Col, Divider, Image } from "antd";
 import {
   UserOutlined,
   LockOutlined,
@@ -64,19 +64,22 @@ export default function Signup() {
 
   return (
     <Row align="middle" style={{ height: "100vh" }}>
-      <Col span={12} offset={6}>
+      <Col span={18} offset={3}>
+        <div style={{textAlign: 'center'}}>
+          <Link to="/"><Image  width={100} src="logo.png" preview={false}/></Link>
+        </div>
         <h1 style={{ textAlign: "center" }}>Registration</h1>
         <Form
           name="normal_login"
           className="login-form"
-          style={{ maxWidth: "550px", margin: "0 auto" }}
+          style={{ maxWidth: "", margin: "0 auto" }}
           initialValues={{
             remember: true,
           }}
           onFinish={onFinish}
         >
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-            <Col className="gutter-row" span={12}>
+            <Col className="gutter-row" span={8}>
               <div style={style}>
                 <Form.Item
                   name="firstname"
@@ -95,7 +98,7 @@ export default function Signup() {
                 </Form.Item>
               </div>
             </Col>
-            <Col className="gutter-row" span={12}>
+            <Col className="gutter-row" span={8}>
               <div style={style}>
                 <Form.Item
                   name="lastname"
@@ -114,7 +117,7 @@ export default function Signup() {
                 </Form.Item>
               </div>
             </Col>
-            <Col className="gutter-row" span={12}>
+            <Col className="gutter-row" span={8}>
               <div style={style}>
                 <Form.Item
                   name="email"
@@ -133,7 +136,7 @@ export default function Signup() {
                 </Form.Item>
               </div>
             </Col>
-            <Col className="gutter-row" span={12}>
+            <Col className="gutter-row" span={8}>
               <div style={style}>
                 <Form.Item
                   name="phone"
@@ -152,7 +155,7 @@ export default function Signup() {
                 </Form.Item>
               </div>
             </Col>
-            <Col className="gutter-row" span={12}>
+            <Col className="gutter-row" span={8}>
               <div style={style}>
                 <Form.Item 
                   name="city"
@@ -171,7 +174,7 @@ export default function Signup() {
                 </Form.Item>
               </div>
             </Col>
-            <Col className="gutter-row" span={12}>
+            <Col className="gutter-row" span={8}>
               <div style={style}>
                 <Form.Item
                   name="street"
@@ -190,7 +193,7 @@ export default function Signup() {
                 </Form.Item>
               </div>
             </Col>
-            <Col className="gutter-row" span={12}>
+            <Col className="gutter-row" span={8}>
               <div style={style}>
                 <Form.Item
                   name="number"
@@ -209,7 +212,7 @@ export default function Signup() {
                 </Form.Item>
               </div>
             </Col>
-            <Col className="gutter-row" span={12}>
+            <Col className="gutter-row" span={8}>
               <div style={style}>
                 <Form.Item
                   name="zipcode"
@@ -228,7 +231,7 @@ export default function Signup() {
                 </Form.Item>
               </div>
             </Col>
-            <Col className="gutter-row" span={12}>
+            <Col className="gutter-row" span={8}>
               <div style={style}>
                 <Form.Item
                   name="lat"
@@ -247,7 +250,7 @@ export default function Signup() {
                 </Form.Item>
               </div>
             </Col>
-            <Col className="gutter-row" span={12}>
+            <Col className="gutter-row" span={8}>
               <div style={style}>
                 <Form.Item
                   name="long"
@@ -267,7 +270,7 @@ export default function Signup() {
               </div>
             </Col>
 
-          <Col className="gutter-row" span={12}>
+            <Col className="gutter-row" span={8}>
           <div style={style}>
           <Form.Item
             name="username"
@@ -287,7 +290,7 @@ export default function Signup() {
           </div>
           </Col>
           
-        <Col className="gutter-row" span={12}>
+          <Col className="gutter-row" span={8}>
           <div style={style}>
           <Form.Item
             name="password" 

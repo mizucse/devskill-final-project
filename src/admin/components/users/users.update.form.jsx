@@ -21,25 +21,36 @@ export default function UpdateUser() {
     },[]);
 
   const [userData, setUserData] = useState({
-    role: "",
-    firstname: "",
-    lastname: "",
-    email: "",
-    phone: "",
-    username: "",
-    password: "",
+    role: userInfo?.role,
+    firstname: userInfo?.firstname,
+    lastname: userInfo?.lastname,
+    email: userInfo?.email,
+    phone: userInfo?.phone,
+    username: userInfo.username,
+    password: userInfo?.password,
     address: {
-      city: "",
-      street: "",
-      number: "",
-      zipcode: "",
+      city: '',
+      street: '',
+      number: '',
+      zipcode: '',
       geolocation: {
-        lat: "",
-        long: "",
+        lat: '',
+        long: '',
       },
     },
+    // address: {
+    //   city: userInfo.address.city,
+    //   street: userInfo.address.street,
+    //   number: userInfo.address.number,
+    //   zipcode: userInfo.address.zipcode,
+    //   geolocation: {
+    //     lat: userInfo.address.geolocation.lat,
+    //     long: userInfo.address.geolocation.long,
+    //   },
+    // },
   });
-
+  console.log(userData.username, '00=========== userData.username===================00');
+  
   const signupInfo = (e, dataType) => {
     setUserData({ ...userData, [dataType]: e.target.value });
   };
@@ -63,7 +74,7 @@ export default function UpdateUser() {
     setUserData({ ...userData, role: value });
   };
   const signupSubmit = () => {
-    console.log(userData, "userData===");
+    console.log(userData, "----------------userData===");
 
     dispatch(adminUpdateUserAction(userData,id));
   };
@@ -90,7 +101,7 @@ export default function UpdateUser() {
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col className="gutter-row" span={6}>
               <div style={style}>
-                <Form.Item 
+                <Form.Item
                   name="firstname"
                   rules={[
                     {
@@ -100,10 +111,10 @@ export default function UpdateUser() {
                   ]}
                 >
                   <Input
-                    value={userData.firstname} 
                     onKeyUp={(e) => signupInfo(e, "firstname")}
                     prefix={<UserOutlined className="site-form-item-icon" />}
                     placeholder="First Name"
+                    value={userData.firstname }
                   />
                 </Form.Item>
               </div>
@@ -120,7 +131,7 @@ export default function UpdateUser() {
                   ]}
                 >
                   <Input
-                    value={userInfo.username}
+                    value={userData.lastname}
                     onKeyUp={(e) => signupInfo(e, "lastname")}
                     prefix={<UserOutlined className="site-form-item-icon" />}
                     placeholder="Last Name"
@@ -303,7 +314,7 @@ export default function UpdateUser() {
                   ]}
                 >
                   <Input
-                    value={userData.username} 
+                    value={userData.username}
                     autoComplete="off"
                     onKeyUp={(e) => signupInfo(e, "username")}
                     prefix={<UserOutlined className="site-form-item-icon" />}

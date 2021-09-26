@@ -36,33 +36,33 @@ export default function UpdateProduct() {
   // console.log(category,'=== Category ===');
 
   const [image, setImage] = useState();
-  const [addProductData, setAddProductData] = useState({
-    title: "",
-    price: 0,
-    description: "",
-    image: "",
-    stock: 0,
+  const [productData, setProductData] = useState({
+    title: productDetail.title,
+    price: productDetail.price,
+    description: productDetail.description,
+    image: productDetail.image,
+    stock: productDetail.stock,
     category: {
-      _id: "",
+      _id: '',
     },
   });
 
   const productCatInfo = (e, dataType) => {
-    setAddProductData({
-      ...addProductData,
-      category: { ...addProductData.category, [dataType]: e },
+    setProductData({
+      ...productData,
+      category: { ...productData.category, [dataType]: e },
     });
   };
 
   const productInfo = (e, dataType) => {
     console.log(e);
     console.log(dataType);
-    setAddProductData({ ...addProductData, [dataType]: e.target.value });
+    setProductData({ ...productData, [dataType]: e.target.value });
   };
 
   const addProductSubmit = () => {
-    dispatch(UpdateProductAction(id, addProductData));
-    console.log(addProductData, "=====products info taken======");
+    dispatch(UpdateProductAction(id, productData));
+    console.log(productData, "=====products info taken======");
   };
 
   const onFinish = (values) => {
@@ -77,7 +77,7 @@ export default function UpdateProduct() {
 
   const handleImage = (e) => {
     setImage({ files: e });
-    setAddProductData({ ...addProductData, image: e.base64 });
+    setProductData({ ...productData, image: e.base64 });
     // console.log(e.base64, "Image Event");
   };
 
@@ -104,6 +104,7 @@ export default function UpdateProduct() {
             ]}
           >
             <Input
+                value={productData.title}
               onKeyUp={(e) => productInfo(e, "title")}
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Product Title"
@@ -120,6 +121,7 @@ export default function UpdateProduct() {
             ]}
           >
             <Input
+                value={productData.price}
               onKeyUp={(e) => productInfo(e, "price")}
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Price"
@@ -135,6 +137,7 @@ export default function UpdateProduct() {
             ]}
           >
             <Input
+                value={productData.description}
               onKeyUp={(e) => productInfo(e, "description")}
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Product description"
@@ -158,6 +161,7 @@ export default function UpdateProduct() {
             ]}
           >
             <Input
+                value={productData.stock}
               onKeyUp={(e) => productInfo(e, "stock")}
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Stock"
@@ -165,6 +169,7 @@ export default function UpdateProduct() {
           </Form.Item>
 
           <Select
+                value={productData.category._id}
             defaultValue="Select Category"
             onChange={(e) => productCatInfo(e, "_id")}
             style={{ width: "100%", marginBottom: "30px" }}
