@@ -4,7 +4,7 @@ import { Row, Col, Divider, Card, Button } from "antd";
 import { BASE_URL } from "../../../utils/constants";
 import { useHistory } from 'react-router'; 
 import { useDispatch, useSelector } from 'react-redux';
-import { GetAllProductAction } from '../../../store/action/productAction';
+import { GetProductDetailsAction, GetAllProductAction } from '../../../store/action/productAction';
 import { cartAction } from "../../../store/action/cartAction";
 import { Loader } from "../loader/loader";
 
@@ -31,15 +31,16 @@ export default function PublicProducts() {
 
         history.push(`/product/${id}`);
     } 
+ 
 
-    // console.log(productList,"========products components======");
-
-    // function onChange(value) { 
-    //     setCartQty(value);
+    // const addToCart = (e) => {
+    //     e.preventDefault(); 
+    //     dispatch(cartAction(id,cartQty))
     // }
 
-    const addToCart = (id,cartQty) => {
-        console.log(id,"========added to cart======");
+    const addToCart = (e, id) => {
+        e.preventDefault(); 
+        console.log(id,cartQty,"========added to cart======");
         dispatch(cartAction(id,cartQty));
     } 
     
@@ -65,7 +66,7 @@ export default function PublicProducts() {
                             <Meta title={product.title} onClick={(e)=>viewProductDetails(e, product._id)}/>
                             <h4 style={{paddingTop: "5px"}}>Price: {product.price} </h4>
                             {/* <Meta description={product.description} />  */}
-                            <Button onClick={((e)=>addToCart(e, product?.id))} type="primary"  size="medium" style={{zIndex: 22}}>
+                            <Button onClick={((e)=>addToCart(e, product?.id,))} type="primary"  size="medium" style={{zIndex: 22}}>
                                 Add to cart
                             </Button>
                         </Card>

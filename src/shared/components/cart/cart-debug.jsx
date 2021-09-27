@@ -34,7 +34,7 @@ export default function CartList() {
         </>
         )  : ( 
         <> 
-        {/* <h1 style={{background: "red", height: "300px", width: "100%"}}>teest</h1> */}
+        <h1 style={{background: "red", height: "300px", width: "100%"}}>teest</h1>
             <Table dataSource={data}>
             <ColumnGroup title="Cart Products">
             <Column title="Image" dataIndex="Image" key="Image" render={(text, record) => (
