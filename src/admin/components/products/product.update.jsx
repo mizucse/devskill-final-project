@@ -8,7 +8,7 @@ import { useParams } from 'react-router';
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { CategoryListAction } from "../../../store/action/categoryAction";
-import { UpdateProductAction } from "../../../store/action/productAction";
+import { GetProductDetailsAction, UpdateProductAction } from "../../../store/action/productAction";
 import FileBase64 from "react-file-base64";
 
 import { Select } from "antd";
@@ -16,11 +16,15 @@ import { Select } from "antd";
 export default function UpdateProduct() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(GetProductDetailsAction(id));
+  },[]);
   const productDetail = useSelector(store=>store.productDetailsStore.productDetail)
 
   const { category } = useSelector((store) => store.categoryStore);
-
+  
   const { Option } = Select;
+
  
 
   function onChange(value) {
@@ -37,13 +41,13 @@ export default function UpdateProduct() {
 
   const [image, setImage] = useState();
   const [productData, setProductData] = useState({
-    title: productDetail.title,
-    price: productDetail.price,
-    description: productDetail.description,
-    image: productDetail.image,
-    stock: productDetail.stock,
+    title: productDetail?.title,
+    price: productDetail?.price,
+    description: productDetail?.description,
+    image: productDetail?.image,
+    stock: productDetail?.stock,
     category: {
-      _id: '',
+      _id: productDetail.category?.name,
     },
   });
 
@@ -59,6 +63,8 @@ export default function UpdateProduct() {
     console.log(dataType);
     setProductData({ ...productData, [dataType]: e.target.value });
   };
+
+  console.log(productData ,"productData in product update ==========!!!");
 
   const addProductSubmit = () => {
     dispatch(UpdateProductAction(id, productData));
@@ -104,7 +110,7 @@ export default function UpdateProduct() {
             ]}
           >
             <Input
-                value={productData.title}
+              defaultValue={productData?.title}
               onKeyUp={(e) => productInfo(e, "title")}
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Product Title"
@@ -121,7 +127,7 @@ export default function UpdateProduct() {
             ]}
           >
             <Input
-                value={productData.price}
+                defaultValue={productData.price}
               onKeyUp={(e) => productInfo(e, "price")}
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Price"
@@ -137,7 +143,7 @@ export default function UpdateProduct() {
             ]}
           >
             <Input
-                value={productData.description}
+                defaultValue={productData.description}
               onKeyUp={(e) => productInfo(e, "description")}
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Product description"
@@ -160,25 +166,25 @@ export default function UpdateProduct() {
               },
             ]}
           >
-            <Input
-                value={productData.stock}
+            <Input 
+              defaultValue={productData.stock}
               onKeyUp={(e) => productInfo(e, "stock")}
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Stock"
             />
           </Form.Item>
 
-          <Select
-                value={productData.category._id}
-            defaultValue="Select Category"
+          <Select 
+            // defaultValue="Select Category"
+            defaultValue={productData.category?._id}
             onChange={(e) => productCatInfo(e, "_id")}
             style={{ width: "100%", marginBottom: "30px" }}
           >
             {category.map((cat, index) => {
               return (
-                <option key={index} value={cat._id}>
+                <Option key={index} value={cat._id}>
                   {cat.name}
-                </option>
+                </Option>
               );
             })}
           </Select>

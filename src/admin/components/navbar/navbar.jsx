@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../../utils/helpers/history';
-import { SignOutAction } from '../../../store/action/signOutAction';
+import { SignOutData } from '../../../store/action/signOutAction';
 import { getCartAction } from '../../../store/action/cartAction';
 import { useHistory } from 'react-router';
 
@@ -46,8 +46,8 @@ export default  function AdminNavBar({children}) {
     const logout = () => {
       console.log("Inside logout function after logout click");
       // dispatch(Logout());
-      dispatch(SignOutAction());
-      // history.push('/');
+      dispatch(SignOutData());
+      history.push('/login');
     }
  
     return (

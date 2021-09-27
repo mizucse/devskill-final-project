@@ -5,25 +5,27 @@ import { ActionType } from "../actionType";
 
 
 
-export const SignOutAction = () => {
-    // const history = useHistory();
+// export const SignOutAction = () => {
+//     // const history = useHistory();
 
-    return async (dispatch, action) => { 
-        dispatch(SignOutData());
-        history.push('/login');
-        window.location.reload(100);
-    }
-}
+//     return async (dispatch, action) => { 
+//         dispatch(SignOutData());
+//         history.push('/login');
+//         window.location.reload(100);
+//     }
+// }
+
+
 
 export const SignOutData = () => {
     return {
-        type: ActionType.SIGN_OUT,
+        type: ActionType.SIGN_IN,
         payload: {
-            authStore: {
+            userInfo:{
                 email: null,
                 role: null,
-                token: null
+                token: null,
             }
-        } 
+        }
     }
 }

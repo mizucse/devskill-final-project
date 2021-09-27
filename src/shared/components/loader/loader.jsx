@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Spin } from 'antd';
 
 const styles = theme => ( {
@@ -12,11 +12,14 @@ const styles = theme => ( {
     },
   } );
 
-export function Loader() {
-    return <>
-        <div className={styles.spinner}>
-            <Spin />
+export function Loader() { 
+    return <> 
+        <div className="loader-container">
+            <div className="loader"></div>
         </div>
+        {/* <div className={styles.spinner}>
+            <Spin />
+        </div> */}
     </>
 }
 

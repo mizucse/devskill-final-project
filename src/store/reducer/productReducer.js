@@ -29,7 +29,7 @@ const productDetails = {
     productDetail : {}
   };
 
-  export const ProductDetailsReducer = (state = productDetails, action) => {
+export const ProductDetailsReducer = (state = productDetails, action) => {
 
     switch(action.type) {
         case ActionType.PRODUCT_DETAILS_SUCCESS:

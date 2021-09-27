@@ -29,13 +29,13 @@ export default function UpdateUser() {
     username: userInfo.username,
     password: userInfo?.password,
     address: {
-      city: '',
-      street: '',
-      number: '',
-      zipcode: '',
+      city: userInfo.address?.city,
+      street: userInfo.address?.street,
+      number: userInfo.address?.number,
+      zipcode: userInfo.address?.zipcode,
       geolocation: {
-        lat: '',
-        long: '',
+        lat: userInfo.address?.geolocation?.lat,
+        long: userInfo.address?.geolocation?.long,
       },
     },
     // address: {
@@ -113,8 +113,8 @@ export default function UpdateUser() {
                   <Input
                     onKeyUp={(e) => signupInfo(e, "firstname")}
                     prefix={<UserOutlined className="site-form-item-icon" />}
-                    placeholder="First Name"
-                    value={userData.firstname }
+                    placeholder="firstname"
+                    defaultValue={userData.firstname }
                   />
                 </Form.Item>
               </div>
@@ -130,19 +130,18 @@ export default function UpdateUser() {
                     },
                   ]}
                 >
-                  <Input
-                    value={userData.lastname}
+                  <Input 
                     onKeyUp={(e) => signupInfo(e, "lastname")}
                     prefix={<UserOutlined className="site-form-item-icon" />}
                     placeholder="Last Name"
+                    defaultValue={userData.lastname }
                   />
                 </Form.Item>
               </div>
             </Col>
             <Col className="gutter-row" span={6}>
               <div style={style}>
-                <Form.Item
-                    initialValues={userInfo.email}
+                <Form.Item 
                     name="email"
                     rules={[
                         {
@@ -152,8 +151,7 @@ export default function UpdateUser() {
                     ]}
                 >
                   <Input
-                    value={userData.email} 
-                    initialValues="test@gmail.com"
+                    defaultValue={userData.email} 
                     onKeyUp={(e) => signupInfo(e, "email")}
                     prefix={<MailOutlined className="site-form-item-icon" />}
                     placeholder="email"
@@ -173,7 +171,7 @@ export default function UpdateUser() {
                   ]}
                 >
                   <Input
-                    value={userData.phone} 
+                    defaultValue={userData.phone} 
                     onKeyUp={(e) => signupInfo(e, "phone")}
                     prefix={<PhoneOutlined className="site-form-item-icon" />}
                     placeholder="Phone Number"
@@ -193,7 +191,7 @@ export default function UpdateUser() {
                   ]}
                 >
                   <Input
-                    value={userData.address.city} 
+                    defaultValue={userData.address?.city} 
                     onKeyUp={(e) => addressInfo(e, "city")}
                     prefix={<AimOutlined className="site-form-item-icon" />}
                     placeholder="City"
@@ -213,7 +211,7 @@ export default function UpdateUser() {
                   ]}
                 >
                   <Input
-                    value={userData.address.street} 
+                    defaultValue={userData.address?.street} 
                     onKeyUp={(e) => addressInfo(e, "street")}
                     prefix={<AimOutlined className="site-form-item-icon" />}
                     placeholder="Street"
@@ -233,7 +231,7 @@ export default function UpdateUser() {
                   ]}
                 >
                   <Input
-                    value={userData.address.number} 
+                    defaultValue={userData.address?.number} 
                     onKeyUp={(e) => addressInfo(e, "number")}
                     prefix={<AimOutlined className="site-form-item-icon" />}
                     placeholder="Number"
@@ -253,7 +251,7 @@ export default function UpdateUser() {
                   ]}
                 >
                   <Input
-                    value={userData.address.zipcode} 
+                    defaultValue={userData.address?.zipcode} 
                     onKeyUp={(e) => addressInfo(e, "zipcode")}
                     prefix={<AimOutlined className="site-form-item-icon" />}
                     placeholder="Zipcode"
@@ -273,7 +271,7 @@ export default function UpdateUser() {
                   ]}
                 >
                   <Input
-                    value={userData.address.geolocation.lat} 
+                    defaultValue={userData.address?.geolocation?.lat} 
                     onKeyUp={(e) => geolocationInfo(e, "lat")}
                     prefix={<AimOutlined className="site-form-item-icon" />}
                     placeholder="Latitude"
@@ -293,7 +291,7 @@ export default function UpdateUser() {
                   ]}
                 >
                   <Input
-                    value={userData.address.geolocation.long} 
+                    defaultValue={userData.address?.geolocation.long} 
                     onKeyUp={(e) => geolocationInfo(e, "long")}
                     prefix={<AimOutlined className="site-form-item-icon" />}
                     placeholder="Longitude"
@@ -314,7 +312,7 @@ export default function UpdateUser() {
                   ]}
                 >
                   <Input
-                    value={userData.username}
+                    defaultValue={userData.username}
                     autoComplete="off"
                     onKeyUp={(e) => signupInfo(e, "username")}
                     prefix={<UserOutlined className="site-form-item-icon" />}
@@ -336,7 +334,7 @@ export default function UpdateUser() {
                   ]}
                 >
                   <Input
-                    value={userData.password} 
+                    defaultValue={userData.password} 
                     onKeyUp={(e) => signupInfo(e, "password")}
                     prefix={
                       <LockOutlined
@@ -354,7 +352,7 @@ export default function UpdateUser() {
             <Col className="gutter-row" span={6}>
               <div style={style}>
                 <Select
-                    value={userData.role} 
+                    defaultValue={userData.role} 
                   onChange={userType}
                   style={{ width: "100%" }}
                 >

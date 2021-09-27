@@ -33,11 +33,11 @@ export default function Profile() {
 
     
   return (
-    <> 
+    <>
     <Card title="My Profile" bordered={false} style={{ width: "100%" }}>
       <Row>
         <Col span={8}> 
-            <h4><u>Geolocation</u></h4>
+            <h4><u>Basic Information</u></h4>
             <p><b>First Name:</b> {profileData?.firstname} </p>
             <p><b>Last Name:</b> {profileData?.lastname} </p>
             <p><b>Email:</b> {profileData?.email} </p>

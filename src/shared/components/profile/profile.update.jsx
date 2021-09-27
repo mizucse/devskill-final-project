@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import { BASE_URL } from "../../../utils/constants";
 import { Form, Input, Button, Checkbox, Row, Col, Divider, Image } from "antd";
 import {
@@ -14,11 +14,9 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
 import { signUpAction } from "../../../store/action/userAction";
-import { Loader } from "../loader/loader";
 
 export default function Signup() {
   const style = { padding: "8px 0" };
-  const [loader, setLoader] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -52,13 +50,6 @@ export default function Signup() {
   const geolocationInfo = (e, dataType) => {
     setSignUpData({...signUpData, geolocation:{...signUpData.geolocation,[dataType]: e.target.value}});
   };
-  
-  useEffect(()=>{
-    setTimeout(() => { 
-      setLoader(false);
-    }, 2000); 
-  },[]);
-
   const signupSubmit = () => {
     // console.log(signUpData,"signupdata===");
 
@@ -71,19 +62,13 @@ export default function Signup() {
     // console.log('signUpData=======' );
   };
 
-  return  <>
-  {
-    loader ? (
-      <>
-      <Loader />
-      </>
-      )  : (
+  return (
     <Row align="middle" style={{ height: "100vh" }}>
       <Col span={18} offset={3}>
         <div style={{textAlign: 'center'}}>
           <Link to="/"><Image  width={100} src="logo.png" preview={false}/></Link>
         </div>
-        <h1 style={{ textAlign: "center" }}>Registration</h1>
+        <h1 style={{ textAlign: "center" }}>Update Profile</h1>
         <Form
           name="normal_login"
           className="login-form"
@@ -344,7 +329,5 @@ export default function Signup() {
         </Form>
       </Col>
     </Row>
-  )
-}
-</>
+  );
 }

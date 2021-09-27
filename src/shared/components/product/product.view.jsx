@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Divider, Card, InputNumber, Button  } from "antd";
 import { CartOutlined } from '@ant-design/icons';
-
+import { Loader } from "../loader/loader";
 import { BASE_URL } from "../../../utils/constants";
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,13 +13,17 @@ const { Meta } = Card;
 
 export default function ProductDetails() {
     const {id} = useParams();
+    const [loader, setLoader] = useState(true);
     const history = useHistory(); 
-    const currentProduct = useSelector(store=>store.productDetailsStore.productDetail)
+    const currentProduct = useSelector(store=>store.productDetailsStore.productDetail);
     const [cartQty, setCartQty] = useState(1);
 
     const dispatch = useDispatch();
 
     useEffect(()=>{
+      setTimeout(() => { 
+        setLoader(false);
+      }, 2000);
       dispatch(GetProductDetailsAction(id));
     },[]);
 
@@ -33,23 +37,31 @@ export default function ProductDetails() {
     }
 
     
-  return (
-    <>
-    <Divider orientation="left">Product Details</Divider>
-    <Row>
-      <Col span={8} style={{padding: "0 15px"}}><img style={{width: "100%"}} alt="example" src={BASE_URL+currentProduct?.image} /></Col>
-      <Col span={16}>
-        <Card title={currentProduct?.title} style={{ width: "100%" }}>
-            <p>Price: {currentProduct?.price}</p>
-            <p>Category: {currentProduct.category?.name}</p>
-            <p>{currentProduct?.description}</p>
-            <InputNumber min={1}  defaultValue={1} onChange={onChange} /> &nbsp;
-            <Button onClick={(e) => addToCart(e)} type="primary"  size="medium" >
-                Add to cart
-            </Button>
-        </Card>
-      </Col>
-    </Row> 
+  return <>
+    {
+      loader ? (
+        <>
+        <Loader />
+        </>
+        )  : ( 
+        <>
+        <Divider orientation="left">Product Details</Divider>
+        <Row>
+          <Col span={8} style={{padding: "0 15px"}}><img style={{width: "100%"}} alt="example" src={BASE_URL+currentProduct?.image} /></Col>
+          <Col span={16}>
+            <Card title={currentProduct?.title} style={{ width: "100%" }}>
+                <p>Price: {currentProduct?.price}</p>
+                <p>Category: {currentProduct.category?.name}</p>
+                <p>{currentProduct?.description}</p>
+                <InputNumber min={1}  defaultValue={1} onChange={onChange} /> &nbsp;
+                <Button onClick={(e) => addToCart(e)} type="primary"  size="medium" >
+                    Add to cart
+                </Button>
+            </Card>
+          </Col>
+        </Row> 
+        </>
+      )
+    }
     </>
-  );
 }

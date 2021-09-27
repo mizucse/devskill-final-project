@@ -47,10 +47,10 @@ export default function UpdateCategory() {
             <Form {...formItemLayout} layout={formLayout} form={form} initialValues={{ layout: formLayout, }} >
           
         <Form.Item label="Category Name">
-            <Input placeholder="Input Category Name" value={category.name} onChange={e=> changeCategory(e,'name')} />
+            <Input placeholder="Input Category Name" defaultValue={category.name} onChange={e=> changeCategory(e,'name')} />
         </Form.Item>
         <Form.Item label="Category Description">
-            <Input placeholder="Input Category Description"  value={category.description} onChange={e=> changeCategory(e,'description')} />
+            <Input placeholder="Input Category Description"  defaultValue={category.description} onChange={e=> changeCategory(e,'description')} />
         </Form.Item>
         <Form.Item  >
             <Button onClick={() => submitUpdateCategory()} type="primary">Submit</Button>

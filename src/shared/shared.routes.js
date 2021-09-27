@@ -26,10 +26,15 @@ export default function UserRoutes() {
                     <ProductDetails />
                 </Route> 
                 {
-                    token ? 
-                    <Route path="/orders" >
-                        <Orders />
-                    </Route> : 
+                    token ? <>
+                        <Route path="/orders" >
+                            <Orders />
+                        </Route>
+                        <Route path="/profile" >
+                            <Profile />
+                        </Route> 
+                    </>
+                    : 
                     <Route path="/login" >
                         <Login />
                     </Route>
@@ -39,9 +44,6 @@ export default function UserRoutes() {
                     <CartList />
                 </Route> 
                 
-                <Route path="/profile" >
-                    <Profile />
-                </Route> 
                 <Route exact path="*" >
                     Not Found
                 </Route>
