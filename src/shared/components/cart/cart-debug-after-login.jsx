@@ -5,14 +5,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BASE_URL } from '../../../utils/constants';
 import { CheckOutAction } from '../../../store/action/cartAction';
 import { Loader } from "../loader/loader";
+import { useHistory } from 'react-router';
 
 export default function CartList() {
   const [loader, setLoader] = useState(true);
-  const cartData = useSelector((store)=>store.cartStore.data);
   const { Column, ColumnGroup } = Table;
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const authUser = useSelector((store)=>store.authStore);
+    const cartList = useSelector((store)=>store.cartStore.data);
 
-    const data = cartData
+    var data = [];
+
+    if(authUser.token !== null){
+      if(authUser.role == "admin"){
+        history.push('/admin');
+      }else if(authUser.role == "user") {
+        var data = cartList
+      }
+    }
 
     useEffect(()=>{
       setTimeout(() => { 
@@ -20,7 +31,7 @@ export default function CartList() {
       }, 2000); 
     },[]);
 
-    console.log(cartData, 'cartList data======');
+    console.log(data, 'cartList data======');
 
     function checkOut() {
       dispatch(CheckOutAction());
@@ -48,11 +59,11 @@ export default function CartList() {
             <Column title="Total" render={(text, record) => (record.quantity*record.productId.price)} /> 
             </ColumnGroup>
         </Table>
-        {
-          cartData && <div> 
+        {/* {
+          cartList && <div> 
           <Button onClick={(e)=>checkOut()} type="primary">Proceed to Checkout</Button>
         </div>  
-        }
+        } */}
         
         </>
     )

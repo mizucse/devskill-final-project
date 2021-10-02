@@ -62,7 +62,7 @@ export default function Login() {
           <div style={{textAlign: 'center'}}>
             <Link to="/"><Image  width={100} src="logo.png" preview={false}/></Link>
           </div>
-          <Title style={{textAlign: 'center'}}>User Login</Title>
+          <Title style={{textAlign: 'center'}}>Login</Title>
           <Form
           name="normal_login"
           className="login-form" style={{maxWith: '750px',margin: '0 auto'}}

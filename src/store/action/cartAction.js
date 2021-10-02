@@ -1,8 +1,9 @@
 import { ActionType } from "../actionType";
 import { BASE_URL,DASHBOARD } from "../../utils/constants";
 import axios from "axios"; 
-import { history } from "../../utils/helpers/history";
+// import { history } from "../../utils/helpers/history";
 import notificationWithIcon from "../../utils/notification";
+import {useHistory} from "react-router-dom";
 
 export const setCartData = (product) => {
     // console.log(product, "product received in setCartData=====");
@@ -23,24 +24,20 @@ export const setOrderListData = (product) => {
 export const cartAction = (productId, qty) => {
     return async (dispatch, getState) => { 
         const {authStore} = getState();
-        const token = authStore.token; 
+        const token = authStore.token;
         try {
             const response = await axios.post(`${BASE_URL}/cart`,{
                 product: { id: productId, quantity: qty }
             }, { headers: { authorization: `bearer ${token}` } });
 
             dispatch(setCartData(response.data?.products));
-            dispatch(getCartAction); 
             notificationWithIcon('success', qty+" product successfully added to cart.");  
-            console.log(response.data,"----- details");
-            
-            if(response.err.message == "jwt malformed"){
-                alert('Your have to login first');
-            } 
+            dispatch(getCartAction); 
+            // console.log(response.data,"----- details");
         }catch(error){
             notificationWithIcon('error', "Product add to cart Failed.");  
             console.log(error,"Product Details view error");
-        } 
+        }  
     }
 }
 

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GetProductDetailsAction, GetAllProductAction } from '../../../store/action/productAction';
 import { cartAction } from "../../../store/action/cartAction";
 import { Loader } from "../loader/loader";
+import notificationWithIcon from "../../../utils/notification";
 
 const style = { padding: '8px 0' };
 const { Meta } = Card;
@@ -14,6 +15,7 @@ const { Meta } = Card;
 export default function PublicProducts() {
     const [loader, setLoader] = useState(true);
     const history = useHistory();
+    const authInfo = useSelector(store=>store.authStore);
     const productList = useSelector(store=>store.productStore.product);
     const [cartQty, setCartQty] = useState(1);
 
@@ -28,10 +30,8 @@ export default function PublicProducts() {
 
     const viewProductDetails = (e, id) => { 
         e.preventDefault();
-
         history.push(`/product/${id}`);
-    } 
- 
+    }
 
     // const addToCart = (e) => {
     //     e.preventDefault(); 
@@ -40,8 +40,17 @@ export default function PublicProducts() {
 
     const addToCart = (e, id) => {
         e.preventDefault(); 
-        console.log(id,cartQty,"========added to cart======");
-        dispatch(cartAction(id,cartQty));
+        // console.log(id,cartQty,"========added to cart======");
+        
+        if(authInfo.token == null){ 
+            notificationWithIcon('error', "You have to login first.");  
+            setTimeout(()=> {
+                history.push(`/login`);
+            },1500);
+        }else{
+            // console.log(id,cartQty,"========added to cart======");
+            dispatch(cartAction(id,cartQty));
+        }
     } 
     
   return <>
@@ -66,7 +75,7 @@ export default function PublicProducts() {
                             <Meta title={product.title} onClick={(e)=>viewProductDetails(e, product._id)}/>
                             <h4 style={{paddingTop: "5px"}}>Price: {product.price} </h4>
                             {/* <Meta description={product.description} />  */}
-                            <Button onClick={((e)=>addToCart(e, product?.id,))} type="primary"  size="medium" style={{zIndex: 22}}>
+                            <Button onClick={(e)=>addToCart(e, product?._id)} type="primary"  size="medium" style={{zIndex: 22}}>
                                 Add to cart
                             </Button>
                         </Card>
