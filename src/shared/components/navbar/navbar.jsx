@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout, Menu, Badge, Image , Avatar , Dropdown } from 'antd';
 import Logout from '../../../shared/components/logout/logout'; 
-import {
-  MenuUnfoldOutlined, UnorderedListOutlined, DatabaseOutlined, PlusCircleOutlined, PicCenterOutlined,
-  MenuFoldOutlined,PlusSquareOutlined,
-  UserOutlined, LogoutOutlined, 
+import {UnorderedListOutlined, DatabaseOutlined, PlusCircleOutlined, PicCenterOutlined, UserOutlined, LogoutOutlined, 
   VideoCameraOutlined,
   UploadOutlined,HomeOutlined, AppstoreOutlined, SettingOutlined,ShoppingCartOutlined
 } from '@ant-design/icons';
@@ -95,7 +92,7 @@ export default  function NavBar({children}) {
     }
     return (
       <Layout> 
-          <Header className="site-layout-background" style={{ position: 'fixed', width: "100%", zIndex: 10, padding: "0 30px",  display: 'flex', justifyContent: "space-between", alignItems: "center"}} >
+          <Header theme={"light"} className="site-layout-background" style={{ position: 'fixed', width: "100%", zIndex: 10, padding: "0 30px",  display: 'flex', justifyContent: "space-between", alignItems: "center"}} >
             <div className="logo" style={{color: '#fff', fontSize: '18px',lineHeight: '60px',textAlign: 'center',fontWeight: 'bold', display: 'flex', justifyContent: 'center'}} >
               <Link to='/'><Image style={{margin: "-17px 0px", width: '50px', }} src="logo.png" preview={false}/> <span style={{color: "#fff !important"}}>MI TECH</span></Link>
             </div>  

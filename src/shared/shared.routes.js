@@ -24,21 +24,16 @@ export default function UserRoutes() {
                 </Route> 
                 <Route exact path="/product/:id" >
                     <ProductDetails />
+                </Route>  
+                <Route path="/orders" >
+                    <Orders />
+                </Route>
+                <Route path="/profile" >
+                    <Profile />
+                </Route>  
+                <Route path="/login" >
+                    <Login />
                 </Route> 
-                {
-                    token ? <>
-                        <Route path="/orders" >
-                            <Orders />
-                        </Route>
-                        <Route path="/profile" >
-                            <Profile />
-                        </Route> 
-                    </>
-                    : 
-                    <Route path="/login" >
-                        <Login />
-                    </Route>
-                }
                 
                 <Route path="/cart" >
                     <CartList />

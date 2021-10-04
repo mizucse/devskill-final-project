@@ -10,17 +10,19 @@ export default function CartList() {
   const [loader, setLoader] = useState(true);
   const cartData = useSelector((store)=>store.cartStore.data);
   const { Column, ColumnGroup } = Table;
-    const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
+
+    console.log('==we are in CartList==');
+    console.log(cartData, 'cartList data======');
 
     const data = cartData
 
     useEffect(()=>{
       setTimeout(() => { 
         setLoader(false);
-      }, 2000); 
+      }, 2000);  
     },[]);
 
-    console.log(cartData, 'cartList data======');
 
     function checkOut() {
       dispatch(CheckOutAction());
@@ -33,10 +35,8 @@ export default function CartList() {
         <Loader />
         </>
         )  : ( 
-        <> 
-        {/* <h1 style={{background: "red", height: "300px", width: "100%"}}>teest</h1> */}
-            <Table dataSource={data}>
-            <ColumnGroup title="Cart Products">
+        <>
+        <Table dataSource={data}>
             <Column title="Image" dataIndex="Image" key="Image" render={(text, record) => (
                 <Space size="middle">
                 <Image style={{width: "100%", maxWidth: "100px"} } src={BASE_URL+record.productId.image} />
@@ -46,7 +46,7 @@ export default function CartList() {
             <Column title="Qty" dataIndex="quantity" key="quantity" render={(text, record) => (record.quantity)}/> 
             <Column title="Price" dataIndex="price" key="price" render={(text, record) => (record.productId.price)} />
             <Column title="Total" render={(text, record) => (record.quantity*record.productId.price)} /> 
-            </ColumnGroup>
+            
         </Table>
         {
           cartData && <div> 

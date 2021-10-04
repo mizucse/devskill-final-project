@@ -4,14 +4,23 @@ import { Table, Tag, Space, Button } from 'antd';
 import { OrderListAction } from '../../../store/action/cartAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteFilled } from "@ant-design/icons"; 
+import { useHistory } from 'react-router';
 
 export default function Orders() {
     const { Column, ColumnGroup } = Table;
     const dispatch = useDispatch();
+    const history = useHistory();
     // const history = useHistory();
+    const authUser = useSelector(store=>store.authStore);
     const orderList = useSelector(store=>store.orderStore)
 
     // console.log(orderList, "===all orders in order.list====");
+
+    if(authUser.token == null) {
+      if(authUser.role == "admin") {
+        history.push('/login');
+      }
+    }
 
     useEffect(()=> {
       dispatch(OrderListAction());

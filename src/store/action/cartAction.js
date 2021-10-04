@@ -24,7 +24,8 @@ export const setOrderListData = (product) => {
 export const cartAction = (productId, qty) => {
     return async (dispatch, getState) => { 
         const {authStore} = getState();
-        const token = authStore.token;
+        const token = authStore.token; 
+        // console.log(productId," --!!-- in cartAction --!!-- ", qty, "===qty===");
         try {
             const response = await axios.post(`${BASE_URL}/cart`,{
                 product: { id: productId, quantity: qty }
@@ -32,8 +33,7 @@ export const cartAction = (productId, qty) => {
 
             dispatch(setCartData(response.data?.products));
             notificationWithIcon('success', qty+" product successfully added to cart.");  
-            dispatch(getCartAction); 
-            // console.log(response.data,"----- details");
+            dispatch(getCartAction);
         }catch(error){
             notificationWithIcon('error', "Product add to cart Failed.");  
             console.log(error,"Product Details view error");

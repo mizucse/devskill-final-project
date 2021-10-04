@@ -14,12 +14,10 @@ const styles = theme => ( {
 
 export function Loader() { 
     return <> 
+        {/* <Spin size="large" /> */}
         <div className="loader-container">
             <div className="loader"></div>
-        </div>
-        {/* <div className={styles.spinner}>
-            <Spin />
-        </div> */}
+        </div> 
     </>
 }
 

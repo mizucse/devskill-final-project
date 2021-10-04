@@ -13,11 +13,20 @@ const { Meta } = Card;
 
 export default function Profile() {
     const {id} = useParams();
-    const history = useHistory();  
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const authUser = useSelector(store=>store.authStore);
     const profileData = useSelector((store)=>store.userDetailsStore.userDetails);
 
-    const dispatch = useDispatch();
 
+    if(authUser.token == null) {
+      if(authUser.role == "admin") {
+        history.push('/admin');
+      }else if(authUser.role == "user"){
+         
+      }
+    }
+    
     useEffect(()=>{
       dispatch(GetProfileDetailsAction());
     },[]);
