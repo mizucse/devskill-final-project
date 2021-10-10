@@ -83,7 +83,14 @@ export default function CartList() {
         </Table>
         {
           cartData && <div> 
-          <Button onClick={(e)=>checkOut()} type="primary">Proceed to Checkout</Button>
+            <Popconfirm
+                    title="Confirm to place this order?" 
+                    onConfirm={(e)=>checkOut()}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <Button type="primary">Proceed to Order</Button>
+              </Popconfirm>
         </div>  
         }
         

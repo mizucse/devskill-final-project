@@ -90,10 +90,38 @@ export const CheckOutAction = () => {
             const response = await axios.get(`${BASE_URL}/order/checkout`, { headers: { authorization: `bearer ${token}` } });
              
             // dispatch(setCartData(response.data));
+            notificationWithIcon('success', "Order placed successfully.");
             console.log(response.data,"====response from checkoutAction===");
+            dispatch(getCartAction); 
             // alert(response.data.message)
         }catch(error){
             console.log(error,"response from checkoutAction error");
+            notificationWithIcon('error', "Failed to place this order.");
+        } 
+    } 
+}
+
+export const ChangeOrderAction = (id, staus_value) => {
+    return async (dispatch, getState) => { 
+        console.log(staus_value, "======staus_value in --ChangeOrderAction====")
+        const {authStore} = getState();
+        const token = authStore.token; 
+        try {
+            const response = await axios.patch(`${BASE_URL}/order/${id}`,
+            { status: staus_value }, { headers: { authorization: `bearer ${token}` } });
+             
+            if(staus_value == 0){
+                notificationWithIcon('success', "Order changed to pending successfully.");
+            }else if(staus_value == 1){
+                notificationWithIcon('success', "Order accepeted successfully.");
+            }else if(staus_value == 2){
+                notificationWithIcon('success', "Order cancelled successfully.");
+            }  
+            dispatch(OrderListAction); 
+            // alert(response.data.message)
+        }catch(error){
+            console.log(error,"Order status change error");
+            notificationWithIcon('error', "Order status change error.");
         } 
     } 
 }

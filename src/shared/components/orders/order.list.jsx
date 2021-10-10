@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';  
 
-import { Table, Tag, Space, Button } from 'antd';
-import { OrderListAction } from '../../../store/action/cartAction';
+import { Table, Tag, Space, Button,Select } from 'antd';
+import { ChangeOrderAction, OrderListAction } from '../../../store/action/cartAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteFilled } from "@ant-design/icons"; 
 import { useHistory } from 'react-router';
+// import Select from 'rc-select';
 
 export default function Orders() {
     const { Column, ColumnGroup } = Table;
@@ -27,7 +28,14 @@ export default function Orders() {
     },[]);
 
     const {data} = orderList;
-    
+
+    const { Option } = Select;
+
+    function cancelOrder(id, value) {
+      // console.log(`selected ${value}`);
+      // console.log(`id ${id}`);
+      dispatch(ChangeOrderAction(id,value));
+    }
     // console.log(data, "===all orders data====");
     
   // data.map(order => {
@@ -36,7 +44,7 @@ export default function Orders() {
 
     return (
         <>
-            <h1>Orders</h1>
+            <h1 style={{textAlign: 'center'}}>Orders</h1>
             <Table dataSource={data}>  
             {/* <Column title="Product" dataIndex="product" key="product" /> 
             <Column title="Price" dataIndex="price" key="price" /> 
@@ -61,28 +69,16 @@ export default function Orders() {
             render={(text, record) => {
               if(record.status == 0){
                   return (
-                    <Space size="middle"> 
-                    <a><Button type="default">Update</Button></a>
+                    
+                    <Space size="middle">
+                      <Button onClick={(e)=>cancelOrder(record._id, 2)} type="warning">Cancel</Button>
                     </Space>
                   )
                 }
               }
             }
             />
-            <Column
-            title=""
-            key="action"
-            render={(text, record) => {
-              if(record.status == 0){
-                  return (
-                    <Space size="middle">
-                    <Button type="info"><DeleteFilled /></Button>
-                    </Space>
-                  )
-                } 
-              }
-            }
-            />
+             
         </Table>
         </>
     )
