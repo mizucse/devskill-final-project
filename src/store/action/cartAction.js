@@ -21,7 +21,7 @@ export const setOrderListData = (product) => {
     }
 }
 
-export const cartAction = (productId, qty) => {
+export const cartAction = (productId, qty, title=null) => {
     return async (dispatch, getState) => { 
         const {authStore} = getState();
         const token = authStore.token; 
@@ -32,7 +32,16 @@ export const cartAction = (productId, qty) => {
             }, { headers: { authorization: `bearer ${token}` } });
 
             dispatch(setCartData(response.data?.products));
-            notificationWithIcon('success', qty+" product successfully added to cart.");  
+            if(qty == 0) {
+                notificationWithIcon('success', "Product successfully deleted from cart.");  
+            }else{
+                if(title == null){
+                    notificationWithIcon('success', "Successfully added to cart.");
+                }else {
+                    notificationWithIcon('success', title+" qty successfully updated.");
+                }
+                
+            } 
             dispatch(getCartAction);
         }catch(error){
             notificationWithIcon('error', "Product add to cart Failed.");  
@@ -52,6 +61,23 @@ export const getCartAction = () => {
             // console.log(response.data,"====get all cart from database===");
         }catch(error){
             console.log(error,"Cart Product load from getCartAction error");
+        } 
+    } 
+}
+
+export const DeleteCartProductAction = (id) => {
+    return async (dispatch, getState) => { 
+        const {authStore} = getState();
+        const token = authStore.token; 
+        try {
+            const response = await axios.delete(`${BASE_URL}/cart/${id}`, { headers: { authorization: `bearer ${token}` } });
+             
+            notificationWithIcon('success', "product successfully deleted from cart.");  
+            dispatch(getCartAction); 
+            // console.log(response.data,"====get all cart from database===");
+        }catch(error){
+            notificationWithIcon('error', "product delete from cart failed.");  
+            console.log(error,"product delete from cart failed");
         } 
     } 
 }

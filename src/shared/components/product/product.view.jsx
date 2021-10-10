@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Divider, Card, InputNumber, Button  } from "antd";
-import { CartOutlined } from '@ant-design/icons';
+// import { CartOutlined } from '@ant-design/icons';
 import { Loader } from "../loader/loader";
 import { BASE_URL } from "../../../utils/constants";
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetProductDetailsAction } from '../../../store/action/productAction';
 import { cartAction } from "../../../store/action/cartAction";
 
 const style = { padding: '8px 0' };
-const { Meta } = Card;
+// const { Meta } = Card;
 
 export default function ProductDetails() {
     const {id} = useParams();

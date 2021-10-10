@@ -32,7 +32,6 @@ export default function Products() {
     const deleteProduct = (e, id) => {
         dispatch(DeleteProductAction(id));
         console.log(id, "===== click delete product ====");
-        
     }
 
     return (

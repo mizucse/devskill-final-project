@@ -15,7 +15,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { signUpAction } from "../../../store/action/userAction";
 
-export default function Signup() {
+export default function ProfileUpdate() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  // const history = useHistory();
+  const authUser = useSelector(store=>store.authStore); 
+
   const style = { padding: "8px 0" };
 
   const dispatch = useDispatch();

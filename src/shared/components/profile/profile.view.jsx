@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Divider, Card, InputNumber, Button  } from "antd";
-import { CartOutlined } from '@ant-design/icons';
+import { CartOutlined,EditOutlined } from '@ant-design/icons';
 
 import { BASE_URL } from "../../../utils/constants";
 import { useHistory, useLocation, useParams } from 'react-router-dom';
@@ -43,7 +43,7 @@ export default function Profile() {
     
   return (
     <>
-    <Card title="My Profile" bordered={false} style={{ width: "100%" }}>
+    <Card title="My Profile" extra={<a href="#"><EditOutlined /> Update Profile</a>} bordered={false} style={{ width: "100%" }}>
       <Row>
         <Col span={8}> 
             <h4><u>Basic Information</u></h4>

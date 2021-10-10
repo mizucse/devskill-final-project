@@ -10,6 +10,7 @@ import CartList from './components/cart/cartList';
 import { useSelector } from 'react-redux';
 import Login from './components/login/login';
 import Profile from './components/profile/profile.view';
+// import ProfileUpdate from './components/profile/profile.update';
 
 export default function UserRoutes() {
     const userInfo = useSelector(store => store.authStore);
@@ -31,6 +32,9 @@ export default function UserRoutes() {
                 <Route path="/profile" >
                     <Profile />
                 </Route>  
+                {/* <Route path="/update-profile" >
+                    <ProfileUpdate />
+                </Route>   */}
                 <Route path="/login" >
                     <Login />
                 </Route> 
